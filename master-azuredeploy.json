@@ -176,7 +176,7 @@
         },
         "fileUris": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/arm-components/informatica-p2p/informatica-csa/scripts/ICExtentionScriptV2.ps1?token=AT3nZi5Q4WzdO0MoyZNtlmlxFLnXfxzmks5X4ihnwA%3D%3D"
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/scripts/ICExtentionScript.ps1"
         },
         "arguments": {
             "type": "string",
@@ -187,6 +187,7 @@
     },
     "variables": {
         "storageAccName": "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]",
+        "adfstorageAccName": "[concat(parameters('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(parameters('vmName'),'-publicIp')]",
         "vnetName": "[concat(parameters('vmName'),'-vnet')]",
         "networkInterfaceName": "[concat(parameters('vmName'),'-nic')]",
@@ -205,18 +206,18 @@
         "storageApiVersion": "2015-06-15",
         "networkApiVersion": "2015-06-15",
         "computeApiVersion": "2015-06-15",
-        "armBaseUrl": "https://raw.githubusercontent.com/sysgain/arm-base/",
+        "armBaseUrl": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/nested/",
         "armComponentUrl": "https://raw.githubusercontent.com/sysgain/arm-components/",
-        "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'staging/public-ip/public-ip.json?token=AT3nZmHNE2_-BvfDi-JjsoIKJ7qpiHu9ks5X4408wA%3D%3D')]",
-        "storageAccountUrl": "[concat(variables('armBaseUrl'),'staging/storage/storage.json?token=AT3nZj4QVzb5X9DZGKOpZNkiVNIgQmk9ks5X442twA%3D%3D')]",
-        "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'staging/vnet-subnet/vnet-subnet.json?token=AT3nZuXUcDeMz8EqHfPjA564lbe8Kl4uks5X444uwA%3D%3D')]",
-        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'staging/network-interface/network-interface.json?token=AT3nZhaf5fVy6AYpHjns3Y_P74IjVb-_ks5X445owA%3D%3D')]",
-        "networkSecurityGroupUrl": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/info-nsg.json?token=AT3nZsbDIp8OSeQSyaP_T7Qvv5PCGbALks5X4iTfwA%3D%3D')]",
-        "virtualMachineUrl": "[concat(variables('armBaseUrl'),'staging/virtual-machine/virtual-machine-with-plan.json?token=AT3nZog0z4IAEtsSaH4kq_liXIWk-hkgks5X447BwA%3D%3D')]",
-        "virtualMachineExtUrl": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/info-csa-extension.json?token=AT3nZnf77XvBISPvFXIjf5oNtc2AQRtyks5X4jYCwA%3D%3D')]",
-        "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'sqldatawarehouse/sqldatawarehouse/sqldatawarehouse.json?token=AT3nZjfX9Z1QAKLtyUi29daCXAcmwkqqks5X449LwA%3D%3D')]",
-        "createTableAutomationSetupURL": "https://raw.githubusercontent.com/sysgain/arm-base/automatiojob-with-account/automationjob-with-account/createtableautomationjob.json?token=AT3nZtFKW6thBuyJfGBC7bUggBMAaU6qks5X4_IEwA%3D%3D",
-        "adfSetupURL": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/azuredatafactory.json?token=AT3nZheVb8f6MFIqxt_hxZbSPy_4LqA-ks5X45CCwA%3D%3D')]"
+        "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'public-ip.json')]",
+        "storageAccountUrl": "[concat(variables('armBaseUrl'),'storage.json')]",
+        "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'vnet-subnet.json')]",
+        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'network-interface/network-interface.json')]",
+        "networkSecurityGroupUrl": "[concat(variables('armBaseUrl'),'info-nsg.json')]",
+        "virtualMachineUrl": "[concat(variables('armBaseUrl'),'virtual-machine-with-plan.json')]",
+        "virtualMachineExtUrl": "[concat(variables('armBaseUrl'),'info-csa-extension.json')]",
+        "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'sqldatawarehouse.json')]",
+        "createTableAutomationSetupURL": "[concat(variables('armBaseUrl'),'createtableautomationjob.json')]",
+        "adfSetupURL": "[concat(variables('armBaseUrl'),'azuredatafactory.json')]"
     },
     "resources": [
         {
