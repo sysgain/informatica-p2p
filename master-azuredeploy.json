@@ -234,7 +234,7 @@
         "writeBatchSize": 0,
         "writeBatchTimeout": "00:00:00",
         "timeout": "01:00:00",
-          "location": "South Central US",
+          "automationjoblocation": "South Central US",
     "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
     "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
     "runbookDescription": "Create a Database Table in User provided Datawarehouse",
