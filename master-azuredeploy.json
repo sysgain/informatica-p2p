@@ -164,6 +164,10 @@
                 "description": "Storage Account name"
             }
         },
+        "adfstorageAccountName": {
+            "type": "string",
+            "defaultValue": "adfteststore234"
+        },
         "publicIPdnsPrefix": {
             "type": "string",
             "metadata": {
@@ -249,6 +253,38 @@
         },
         {
             "name": "storageAccountDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('storageAccountUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "storageApiVersion": {
+                        "value": "[variables('storageApiVersion')]"
+                    },
+                    "storageAccountType": {
+                        "value": "[variables('storageAccountType')]"
+                    },
+                    "storageAccountName": {
+                        "value": "[variables('storageAccName')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Storage Account",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "adfstorageAccountDeploy",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
