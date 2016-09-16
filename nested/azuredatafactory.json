@@ -84,7 +84,26 @@
             "defaultValue": "adfteststore234"
         }
     },
-    "variables": {"apiVersion":"2015-10-01"},
+    "variables": {
+        "apiVersion": "2015-10-01",
+        "storageLinkedServiceName": "AzureStorageLinkedService",
+        "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
+        "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
+        "blobInputDataset": "AzureBlobInput",
+        "blobOutputDataset": "AzureBlobOutput",
+        "sqlDWOutputDataset": "AzureSqlDWOutput",
+        "azureSqlDWLinkedServiceConnectionString": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]",
+        "storageAccountName": "adfteststore234",
+        "storageAccountKey": "O6amylTddCu9T+ugCxGirTvTlzz9te74mnyhsRCuW9m64N2NzqlQkJ8Bt0W2vMlg3x0GGRVE0+FvCrXZIIfXvQ==",
+        "clusterSize": 1,
+        "version": "3.2",
+        "timeToLive": "00:45:00",
+        "frequency": "Hour",
+        "interval": 1,
+        "writeBatchSize": 0,
+        "writeBatchTimeout": "00:00:00",
+        "timeout": "01:00:00"
+        },
     "resources": [
         {
             "name": "[parameters('dataFactoryName')]",
