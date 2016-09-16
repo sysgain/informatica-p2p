@@ -331,8 +331,8 @@
                     "storageAccountType": {
                         "value": "[variables('storageAccountType')]"
                     },
-                    "storageAccountName": {
-                        "value": "[variables('storageAccName')]"
+                    "adfstorageAccountName": {
+                        "value": "[parameters('adfstorageAccountName')]"
                     },
                     "tag": {
                         "value": {
@@ -663,6 +663,9 @@
                     },
                     "inputFolderPath": {
                         "value": "[parameters('inputFolderPath')]"
+                    },
+                     "adfstorageAccountName": {
+                        "value": "[parameters('adfstorageAccountName')]"
                     },
                     "outputFolderPath": {
                         "value": "[parameters('outputFolderPath')]"
