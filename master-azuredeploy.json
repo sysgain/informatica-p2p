@@ -701,7 +701,55 @@
                     },
                     "outputFolderPath": {
                         "value": "[parameters('outputFolderPath')]"
-                    }
+                    },
+                            "apiVersion": {
+			"value": "[variables('apiVersion')]"
+        },
+        "storageLinkedServiceName": {
+         "value": "[variables('storageLinkedServiceName')]"
+        },
+        "hdInsightOnDemandLinkedServiceName": {
+		 "value": "[variables('hdInsightOnDemandLinkedServiceName')]"
+        },
+        "azureSqlDWLinkedServiceName": {
+        "value": "[variables('azureSqlDWLinkedServiceName')]"
+        },
+        "blobInputDataset": {
+         "value": "[variables('blobInputDataset')]"
+        },
+        "blobOutputDataset": {
+       "value": "[variables('blobOutputDataset')]"
+        },
+        "sqlDWOutputDataset": {
+         "value": "[variables('sqlDWOutputDataset')]"
+        },
+        "azureSqlDWLinkedServiceConnectionString": {
+           "value": "[variables('azureSqlDWLinkedServiceConnectionString')]"
+        },
+        "clusterSize": {
+		"value": "[variables('clusterSize')]"
+        },
+        "version": {
+		"value": "[variables('version')]"
+        },
+        "timeToLive": {
+		"value": "[variables('timeToLive')]"
+        },
+        "frequency": {
+		"value": "[variables('frequency')]"
+        },
+        "interval": {
+		"value": "[variables('interval')]"
+        },
+        "writeBatchSize": {
+           "value": "[variables('writeBatchSize')]"
+        },
+        "writeBatchTimeout": {
+		"value": "[variables('writeBatchTimeout')]"
+        },
+        "timeout": {
+		"value": "[variables('timeout')]"
+        }
                 }
             }
         }
