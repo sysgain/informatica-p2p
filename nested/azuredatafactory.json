@@ -55,6 +55,10 @@
         "outputFolderPath": {
             "type": "string",
             "defaultValue": "adfgetstarted/inputdata"
+        },
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "adfteststore234"
         }
     },
     "variables": {
@@ -66,8 +70,6 @@
         "blobOutputDataset": "AzureBlobOutput",
         "sqlDWOutputDataset": "AzureSqlDWOutput",
         "azureSqlDWLinkedServiceConnectionString": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]",
-        "storageAccountName": "adfteststore234",
-        "storageAccountKey": "O6amylTddCu9T+ugCxGirTvTlzz9te74mnyhsRCuW9m64N2NzqlQkJ8Bt0W2vMlg3x0GGRVE0+FvCrXZIIfXvQ==",
         "clusterSize": 1,
         "version": "3.2",
         "timeToLive": "00:45:00",
@@ -94,7 +96,7 @@
                     "properties": {
                         "type": "AzureStorage",
                         "typeProperties": {
-                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',variables('storageAccountKey'))]"
+                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')),variables('apiVersion')).key1)]"
                         }
                     }
                 },
@@ -225,8 +227,8 @@
                                     "scriptPath": "adfgetstarted/script/partitionweblogs.hql",
                                     "scriptLinkedService": "[variables('storageLinkedServiceName')]",
                                     "defines": {
-                                        "inputtable": "[concat('wasb://adfgetstarted@', variables('storageAccountName'), '.blob.core.windows.net/inputdata')]",
-                                        "partitionedtable": "[concat('wasb://adfgetstarted@', variables('storageAccountName'), '.blob.core.windows.net/partitioneddata')]"
+                                        "inputtable": "[concat('wasb://adfgetstarted@', parameters('storageAccountName'), '.blob.core.windows.net/inputdata')]",
+                                        "partitionedtable": "[concat('wasb://adfgetstarted@', parameters('storageAccountName'), '.blob.core.windows.net/partitioneddata')]"
                                     }
                                 },
                                 "inputs": [
