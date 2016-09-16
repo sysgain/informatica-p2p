@@ -80,8 +80,7 @@
             "defaultValue": "adfgetstarted/inputdata"
         },
         "adfstorageAccountName": {
-            "type": "string",
-            "defaultValue": "adfteststore234"
+            "type": "string"
         },
         "apiVersion": {
             "type": "string",
