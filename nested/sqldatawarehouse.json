@@ -63,8 +63,12 @@
         }
     },
     "variables": {
-         "sql-api-version": "2014-04-01",
-         "sqldb-api-version": "2015-05-01-preview"
+        "sql-api-version": "2014-04-01",
+        "sqldb-api-version": "2015-05-01-preview",
+        "sqlfirewallrules-api-version": "2014-04-01",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": "10995116277760",
+        "version": "12.0"
     },
     "resources": [
         {
