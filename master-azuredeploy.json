@@ -211,7 +211,7 @@
         "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'public-ip.json')]",
         "storageAccountUrl": "[concat(variables('armBaseUrl'),'storage.json')]",
         "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'vnet-subnet.json')]",
-        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'network-interface/network-interface.json')]",
+        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'network-interface.json')]",
         "networkSecurityGroupUrl": "[concat(variables('armBaseUrl'),'info-nsg.json')]",
         "virtualMachineUrl": "[concat(variables('armBaseUrl'),'virtual-machine-with-plan.json')]",
         "virtualMachineExtUrl": "[concat(variables('armBaseUrl'),'info-csa-extension.json')]",
@@ -331,7 +331,7 @@
                     "storageAccountType": {
                         "value": "[variables('storageAccountType')]"
                     },
-                    "adfstorageAccountName": {
+                    "storageAccountName": {
                         "value": "[parameters('adfstorageAccountName')]"
                     },
                     "tag": {
