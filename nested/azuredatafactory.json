@@ -1,0 +1,295 @@
+{
+    "contentVersion": "1.0.0.0",
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "parameters": {
+        "sqlDWServerName": {
+            "type": "string",
+            "metadata": {
+                "description": "Ex- inforp2ptest"
+            }
+        },
+        "sqlDWDBName": {
+            "type": "string",
+            "metadata": {
+                "description": "SQL Datawarehouse Database Name"
+            }
+        },
+        "sqlDWDBAdminName": {
+            "type": "string",
+            "metadata": {
+                "description": "Sql Data Warehouse User Name"
+            }
+        },
+        "sqlDWAdminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Sql Data Warehouse Password"
+            }
+        },
+        "dataFactoryName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the data factory. It must be globally unique"
+            }
+        },
+        "start": {
+            "type": "string",
+            "metadata": {
+                "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
+            }
+        },
+        "end": {
+            "type": "string",
+            "metadata": {
+                "description": "end time of the data slice. ex: 2014-06-01T18:00:00"
+            }
+        },
+        "tableName": {
+            "type": "string",
+            "defaultValue": "bi9"
+        },
+        "inputFolderPath": {
+            "type": "string",
+            "defaultValue": "adfgetstarted/inputdata"
+        },
+        "outputFolderPath": {
+            "type": "string",
+            "defaultValue": "adfgetstarted/inputdata"
+        }
+    },
+    "variables": {
+        "apiVersion": "2015-10-01",
+        "storageLinkedServiceName": "AzureStorageLinkedService",
+        "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
+        "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
+        "blobInputDataset": "AzureBlobInput",
+        "blobOutputDataset": "AzureBlobOutput",
+        "sqlDWOutputDataset": "AzureSqlDWOutput",
+        "azureSqlDWLinkedServiceConnectionString": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]",
+        "storageAccountName": "adfteststore234",
+        "storageAccountKey": "O6amylTddCu9T+ugCxGirTvTlzz9te74mnyhsRCuW9m64N2NzqlQkJ8Bt0W2vMlg3x0GGRVE0+FvCrXZIIfXvQ==",
+        "clusterSize": 1,
+        "version": "3.2",
+        "timeToLive": "00:45:00",
+        "frequency": "Hour",
+        "interval": 1,
+        "writeBatchSize": 0,
+        "writeBatchTimeout": "00:00:00",
+        "timeout": "01:00:00"
+    },
+    "resources": [
+        {
+            "name": "[parameters('dataFactoryName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "type": "Microsoft.DataFactory/datafactories",
+            "location": "westus",
+            "resources": [
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]"
+                    ],
+                    "type": "linkedservices",
+                    "name": "[variables('storageLinkedServiceName')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "type": "AzureStorage",
+                        "typeProperties": {
+                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',variables('storageAccountKey'))]"
+                        }
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedservices/', variables('storageLinkedServiceName'))]"
+                    ],
+                    "type": "linkedservices",
+                    "name": "[variables('hdInsightOnDemandLinkedServiceName')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "type": "HDInsightOnDemand",
+                        "typeProperties": {
+                            "clusterSize": "[variables('clusterSize')]",
+                            "version": "[variables('version')]",
+                            "timeToLive": "[variables('timeToLive')]",
+                            "osType": "windows",
+                            "linkedServiceName": "[variables('storageLinkedServiceName')]"
+                        }
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]"
+                    ],
+                    "type": "linkedservices",
+                    "name": "[variables('azureSqlDWLinkedServiceName')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "type": "AzureSqlDW",
+                        "typeProperties": {
+                            "connectionString": "[variables('azureSqlDWLinkedServiceConnectionString')]"
+                        }
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]"
+                    ],
+                    "type": "datasets",
+                    "name": "[variables('blobInputDataset')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "type": "AzureBlob",
+                        "linkedServiceName": "[variables('storageLinkedServiceName')]",
+                        "typeProperties": {
+                            "folderPath": "[parameters('inputFolderPath')]",
+                            "format": {
+                                "type": "TextFormat",
+                                "columnDelimiter": ","
+                            }
+                        },
+                        "availability": {
+                            "frequency": "[variables('frequency')]",
+                            "interval": "[variables('interval')]"
+                        },
+                        "external": true,
+                        "policy": {}
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]"
+                    ],
+                    "type": "datasets",
+                    "name": "[variables('blobOutputDataset')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "published": false,
+                        "type": "AzureBlob",
+                        "linkedServiceName": "[variables('storageLinkedServiceName')]",
+                        "typeProperties": {
+                            "folderPath": "[parameters('outputFolderPath')]",
+                            "format": {
+                                "type": "TextFormat",
+                                "columnDelimiter": ","
+                            }
+                        },
+                        "availability": {
+                            "frequency": "[variables('frequency')]",
+                            "interval": "[variables('interval')]"
+                        }
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('azureSqlDWLinkedServiceName'))]"
+                    ],
+                    "type": "datasets",
+                    "name": "[variables('sqlDWOutputDataset')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "published": false,
+                        "type": "AzureSqlDWTable",
+                        "linkedServiceName": "[variables('azureSqlDWLinkedServiceName')]",
+                        "typeProperties": {
+                            "tableName": "[parameters('tableName')]"
+                        },
+                        "availability": {
+                            "frequency": "[variables('frequency')]",
+                            "interval": "[variables('interval')]"
+                        }
+                    }
+                },
+                {
+                    "dependsOn": [
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('hdInsightOnDemandLinkedServiceName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('azureSqlDWLinkedServiceName'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/datasets/', variables('blobInputDataset'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/datasets/', variables('blobOutputDataset'))]",
+                        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/datasets/', variables('sqlDWOutputDataset'))]"
+                    ],
+                    "type": "datapipelines",
+                    "name": "[parameters('dataFactoryName')]",
+                    "apiVersion": "[variables('apiVersion')]",
+                    "properties": {
+                        "description": "My first Azure Data Factory pipeline",
+                        "activities": [
+                            {
+                                "type": "HDInsightHive",
+                                "typeProperties": {
+                                    "scriptPath": "adfgetstarted/script/partitionweblogs.hql",
+                                    "scriptLinkedService": "[variables('storageLinkedServiceName')]",
+                                    "defines": {
+                                        "inputtable": "[concat('wasb://adfgetstarted@', variables('storageAccountName'), '.blob.core.windows.net/inputdata')]",
+                                        "partitionedtable": "[concat('wasb://adfgetstarted@', variables('storageAccountName'), '.blob.core.windows.net/partitioneddata')]"
+                                    }
+                                },
+                                "inputs": [
+                                    {
+                                        "name": "AzureBlobInput"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "AzureBlobOutput"
+                                    }
+                                ],
+                                "policy": {
+                                    "concurrency": 1,
+                                    "retry": 3
+                                },
+                                "scheduler": {
+                                    "frequency": "[variables('frequency')]",
+                                    "interval": "[variables('interval')]"
+                                },
+                                "name": "RunSampleHiveActivity",
+                                "linkedServiceName": "HDInsightOnDemandLinkedService"
+                            },
+                            {
+                                "type": "Copy",
+                                "typeProperties": {
+                                    "source": {
+                                        "type": "BlobSource"
+                                    },
+                                    "sink": {
+                                        "type": "SqlDWSink",
+                                        "writeBatchSize": "[variables('writeBatchSize')]",
+                                        "writeBatchTimeout": "[variables('writeBatchTimeout')]"
+                                    }
+                                },
+                                "inputs": [
+                                    {
+                                        "name": "AzureBlobOutput"
+                                    }
+                                ],
+                                "outputs": [
+                                    {
+                                        "name": "AzureSqlDWOutput"
+                                    }
+                                ],
+                                "policy": {
+                                    "timeout": "[variables('timeout')]",
+                                    "concurrency": 1
+                                },
+                                "scheduler": {
+                                    "frequency": "[variables('frequency')]",
+                                    "interval": "[variables('interval')]"
+                                },
+                                "name": "AzureBlobtoSQLDW",
+                                "description": "Copy Activity"
+                            }
+                        ],
+                        "start": "[parameters('start')]",
+                        "end": "[parameters('end')]",
+                        "isPaused": false
+                    }
+                }
+            ]
+        }
+    ]
+}

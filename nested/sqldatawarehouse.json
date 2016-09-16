@@ -1,0 +1,116 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "eastus",
+            "metadata": {
+                "description": "The location where all azure resources will be deployed."
+            }
+        },
+        "sqlDWServerName": {
+            "type": "string",
+            "metadata": {
+                "description": "SQL Datawarehouse Server Name, should be a unique name"
+            }
+        },
+        "sqlDWDBAdminName": {
+            "type": "string",
+            "metadata": {
+                "description": "SQL Datawarehouse Admin Name"
+            }
+        },
+        "sqlDWAdminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "SQL Datawarehouse Admin password. Ex: Testadmin@123"
+            }
+        },
+        "sqlDWDBName": {
+            "type": "string",
+            "defaultValue": "testdwdb",
+            "metadata": {
+                "description": "SQL Datawarehouse Database Name"
+            }
+        },
+        "serviceLevelObjective": {
+            "type": "string",
+            "defaultValue": "DW100",
+            "allowedValues": [
+                "DW100",
+                "DW100",
+                "DW200",
+                "DW300",
+                "DW400",
+                "DW500",
+                "DW600",
+                "DW1000",
+                "DW1200",
+                "DW1500",
+                "DW2000",
+                "DW3000",
+                "DW6000"
+            ]
+        },
+        "startIpAddress": {
+            "type": "string",
+            "defaultValue": "0.0.0.0"
+        },
+        "endIpAddress": {
+            "type": "string",
+            "defaultValue": "255.255.255.255"
+        }
+    },
+    "variables": {
+        "sql-api-version": "2014-04-01",
+        "sqldb-api-version": "2015-05-01-preview",
+        "sqlfirewallrules-api-version": "2014-04-01",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": "10995116277760",
+        "version": "12.0"
+    },
+    "resources": [
+        {
+            "name": "[parameters('sqlDWServerName')]",
+            "type": "Microsoft.Sql/servers",
+            "location": "[parameters('location')]",
+            "apiVersion": "[variables('sql-api-version')]",
+            "properties": {
+                "administratorLogin": "[parameters('sqlDWDBAdminName')]",
+                "administratorLoginPassword": "[parameters('sqlDWAdminPassword')]",
+                "version": "[variables('version')]"
+            },
+            "resources": [
+                {
+                    "name": "[parameters('sqlDWDBName')]",
+                    "type": "databases",
+                    "location": "[parameters('location')]",
+                    "apiVersion": "[variables('sqldb-api-version')]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Sql/servers/', parameters('sqlDWServerName'))]"
+                    ],
+                    "properties": {
+                        "edition": "DataWarehouse",
+                        "collation": "[variables('collation')]",
+                        "maxSizeBytes": "[variables('maxSizeBytes')]",
+                        "serviceLevelObjective": "[parameters('serviceLevelObjective')]"
+                    }
+                },
+                {
+                    "apiVersion": "[variables('sqlfirewallrules-api-version')]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Sql/servers/', parameters('sqlDWServerName'))]"
+                    ],
+                    "location": "[parameters('location')]",
+                    "name": "AllowAllAzureIps",
+                    "properties": {
+                        "endIpAddress": "[parameters('endIpAddress')]",
+                        "startIpAddress": "[parameters('startIpAddress')]"
+                    },
+                    "type": "firewallrules"
+                }
+            ]
+        }
+    ]
+}
