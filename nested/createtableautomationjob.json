@@ -58,13 +58,7 @@
     }
     
   },
-  "variables": {
-    "location": "South Central US",
-    "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
-    "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
-    "runbookDescription": "Create a Database Table in User provided Datawarehouse",
-    "sku": "Basic"
-  },
+  "variables": {},
   "resources": [
     {
       "type": "Microsoft.Automation/automationAccounts",
