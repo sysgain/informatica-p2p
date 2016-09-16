@@ -1,0 +1,610 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "East US",
+            "allowedValues": [
+                "East US",
+                "East US 2",
+                "North Central US",
+                "South Central US",
+                "West US",
+                "North Europe",
+                "West Europe",
+                "East Asia",
+                "Southeast Asia",
+                "Japan East",
+                "Japan West",
+                "Australia East",
+                "Australia Southeast"
+            ],
+            "metadata": {
+                "description": "The location where all azure resources will be deployed."
+            }
+        },
+        "sqlDWServerName": {
+            "type": "string",
+            "metadata": {
+                "description": "SQL Datawarehouse Server Name, should be a unique name"
+            }
+        },
+        "sqlDWDBAdminName": {
+            "type": "string",
+            "metadata": {
+                "description": "SQL Datawarehouse Admin Name"
+            }
+        },
+        "sqlDWAdminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "SQL Datawarehouse Admin password. Ex: Testadmin@123"
+            }
+        },
+        "sqlDWDBName": {
+            "type": "string",
+            "defaultValue": "testdwdb",
+            "metadata": {
+                "description": "SQL Datawarehouse Database Name"
+            }
+        },
+        "serviceLevelObjective": {
+            "type": "string",
+            "defaultValue": "DW100",
+            "allowedValues": [
+                "DW100",
+                "DW100",
+                "DW200",
+                "DW300",
+                "DW400",
+                "DW500",
+                "DW600",
+                "DW1000",
+                "DW1200",
+                "DW1500",
+                "DW2000",
+                "DW3000",
+                "DW6000"
+            ]
+        },
+        "startIpAddress": {
+            "type": "string",
+            "defaultValue": "0.0.0.0"
+        },
+        "endIpAddress": {
+            "type": "string",
+            "defaultValue": "255.255.255.255"
+        },
+        "jobId": {
+            "type": "string",
+            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
+            "metadata": {
+                "description": "Unique GUID"
+            }
+        },
+        "accountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the automation account. It should be unique"
+            }
+        },
+        "credentialName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name for credentials"
+            }
+        },
+        "runbookName": {
+            "type": "string",
+            "defaultValue": "createtable",
+            "metadata": {
+                "description": "Name of the runbook"
+            }
+        },
+        "dataFactoryName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the data factory. It must be globally unique"
+            }
+        },
+        "start": {
+            "type": "string",
+            "metadata": {
+                "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
+            }
+        },
+        "end": {
+            "type": "string",
+            "metadata": {
+                "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
+            }
+        },
+        "tableName": {
+            "type": "string",
+            "defaultValue": "bi9"
+        },
+        "inputFolderPath": {
+            "type": "string",
+            "defaultValue": "adfgetstarted/inputdata"
+        },
+        "outputFolderPath": {
+            "type": "string",
+            "defaultValue": "adfgetstarted/partitioneddata"
+        },
+        "tag": {
+            "type": "object",
+            "defaultValue": {
+                "value1": "informatica"
+            }
+        },
+        "vmName": {
+            "type": "string",
+            "defaultValue": "informatica",
+            "metadata": {
+                "description": " Virtual machine name"
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "adminusername to login into vm"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": " adminpassword for vm"
+            }
+        },
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "infosa",
+            "metadata": {
+                "description": "Storage Account name"
+            }
+        },
+        "publicIPdnsPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": " public IP dns prefix"
+            }
+        },
+        "fileUris": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/arm-components/informatica-p2p/informatica-csa/scripts/ICExtentionScriptV2.ps1?token=AT3nZi5Q4WzdO0MoyZNtlmlxFLnXfxzmks5X4ihnwA%3D%3D"
+        },
+        "arguments": {
+            "type": "string",
+            "metadata": {
+                "description": "pass in the username and password,use doublequotes around the arguments with spaces"
+            }
+        }
+    },
+    "variables": {
+        "storageAccName": "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]",
+        "pubicIPAddressName": "[concat(parameters('vmName'),'-publicIp')]",
+        "vnetName": "[concat(parameters('vmName'),'-vnet')]",
+        "networkInterfaceName": "[concat(parameters('vmName'),'-nic')]",
+        "networkSecurityGroupsName": "[concat(parameters('vmName'),'-nsg')]",
+        "subnet1Name": "subnet1",
+        "vnetAddressPrefix": "10.2.0.0/16",
+        "subnet1Prefix": "10.2.0.0/24",
+        "storageAccountType": "Standard_LRS",
+        "vmSize": "Standard_A2",
+        "storageContainer": "vhds",
+        "imagePublisher": "informatica-cloud",
+        "imageOffer": "informatica-cloud",
+        "imageVersion": "latest",
+        "imageSKU": "informatica_cloud_secure_agent_32_bit",
+        "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vnetName')), '/subnets/',variables('subnet1Name'))]",
+        "storageApiVersion": "2015-06-15",
+        "networkApiVersion": "2015-06-15",
+        "computeApiVersion": "2015-06-15",
+        "armBaseUrl": "https://raw.githubusercontent.com/sysgain/arm-base/",
+        "armComponentUrl": "https://raw.githubusercontent.com/sysgain/arm-components/",
+        "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'staging/public-ip/public-ip.json?token=AT3nZmHNE2_-BvfDi-JjsoIKJ7qpiHu9ks5X4408wA%3D%3D')]",
+        "storageAccountUrl": "[concat(variables('armBaseUrl'),'staging/storage/storage.json?token=AT3nZj4QVzb5X9DZGKOpZNkiVNIgQmk9ks5X442twA%3D%3D')]",
+        "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'staging/vnet-subnet/vnet-subnet.json?token=AT3nZuXUcDeMz8EqHfPjA564lbe8Kl4uks5X444uwA%3D%3D')]",
+        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'staging/network-interface/network-interface.json?token=AT3nZhaf5fVy6AYpHjns3Y_P74IjVb-_ks5X445owA%3D%3D')]",
+        "networkSecurityGroupUrl": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/info-nsg.json?token=AT3nZsbDIp8OSeQSyaP_T7Qvv5PCGbALks5X4iTfwA%3D%3D')]",
+        "virtualMachineUrl": "[concat(variables('armBaseUrl'),'staging/virtual-machine/virtual-machine-with-plan.json?token=AT3nZog0z4IAEtsSaH4kq_liXIWk-hkgks5X447BwA%3D%3D')]",
+        "virtualMachineExtUrl": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/info-csa-extension.json?token=AT3nZnf77XvBISPvFXIjf5oNtc2AQRtyks5X4jYCwA%3D%3D')]",
+        "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'sqldatawarehouse/sqldatawarehouse/sqldatawarehouse.json?token=AT3nZjfX9Z1QAKLtyUi29daCXAcmwkqqks5X449LwA%3D%3D')]",
+        "createTableAutomationSetupURL": "https://raw.githubusercontent.com/sysgain/arm-base/automatiojob-with-account/automationjob-with-account/createtableautomationjob.json?token=AT3nZtFKW6thBuyJfGBC7bUggBMAaU6qks5X4_IEwA%3D%3D",
+        "adfSetupURL": "[concat(variables('armComponentUrl'),'informatica-p2p/informatica-csa/nested/azuredatafactory.json?token=AT3nZheVb8f6MFIqxt_hxZbSPy_4LqA-ks5X45CCwA%3D%3D')]"
+    },
+    "resources": [
+        {
+            "name": "publicIpAddressDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('publicIpAddressUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "networkApiVersion": {
+                        "value": "[variables('networkApiVersion')]"
+                    },
+                    "publicIPAddressName": {
+                        "value": "[variables('pubicIPAddressName')]"
+                    },
+                    "publicIPdnsPrefix": {
+                        "value": "[parameters('publicIPdnsPrefix')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Public IP Address",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "storageAccountDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('storageAccountUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "storageApiVersion": {
+                        "value": "[variables('storageApiVersion')]"
+                    },
+                    "storageAccountType": {
+                        "value": "[variables('storageAccountType')]"
+                    },
+                    "storageAccountName": {
+                        "value": "[variables('storageAccName')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Storage Account",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtualNetworkDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('virtualNetworkUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "networkApiVersion": {
+                        "value": "[variables('networkApiVersion')]"
+                    },
+                    "vnetName": {
+                        "value": "[variables('vnetName')]"
+                    },
+                    "subnet1Name": {
+                        "value": "[variables('subnet1Name')]"
+                    },
+                    "vnetAddressPrefix": {
+                        "value": "[variables('vnetAddressPrefix')]"
+                    },
+                    "subnet1Prefix": {
+                        "value": "[variables('subnet1Prefix')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Virtual Network",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "networkInterfaceDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "virtualNetworkDeploy",
+                "networkSecurityGroupDeploy",
+                "publicIpAddressDeploy"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('networkInterfaceUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "networkApiVersion": {
+                        "value": "[variables('networkApiVersion')]"
+                    },
+                    "networkInterfaceName": {
+                        "value": "[variables('networkInterfaceName')]"
+                    },
+                    "networkSecurityGroupName": {
+                        "value": "[variables('networkSecurityGroupsName')]"
+                    },
+                    "publicIPAddressName": {
+                        "value": "[variables('pubicIPAddressName')]"
+                    },
+                    "subnetRef": {
+                        "value": "[variables('subnetRef')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Network Interface",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "networkSecurityGroupDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('networkSecurityGroupUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "networkApiVersion": {
+                        "value": "[variables('networkApiVersion')]"
+                    },
+                    "networkSecurityGroupsName": {
+                        "value": "[variables('networkSecurityGroupsName')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Network Security Group",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtualMachineDeploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "storageAccountDeploy",
+                "networkInterfaceDeploy"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('virtualMachineUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "computeApiVersion": {
+                        "value": "[variables('computeApiVersion')]"
+                    },
+                    "vmName": {
+                        "value": "[parameters('vmName')]"
+                    },
+                    "storageAccountName": {
+                        "value": "[variables('storageAccName')]"
+                    },
+                    "vmStorageAccountContainerName": {
+                        "value": "[variables('storageContainer')]"
+                    },
+                    "vmSize": {
+                        "value": "[variables('vmSize')]"
+                    },
+                    "imagePublisher": {
+                        "value": "[variables('imagePublisher')]"
+                    },
+                    "imageOffer": {
+                        "value": "[variables('imageOffer')]"
+                    },
+                    "imageVersion": {
+                        "value": "[variables('imageVersion')]"
+                    },
+                    "imageSKU": {
+                        "value": "[variables('imageSKU')]"
+                    },
+                    "adminUsername": {
+                        "value": "[parameters('adminUsername')]"
+                    },
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"
+                    },
+                    "networkInterfaceName": {
+                        "value": "[variables('networkInterfaceName')]"
+                    },
+                    "tag": {
+                        "value": {
+                            "key1": "Virtual Machine",
+                            "value1": "[parameters('tag').value1]"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtualMachineExtDeploy",
+            "dependsOn": [
+                "virtualMachineDeploy"
+            ],
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('virtualMachineExtUrl')]"
+                },
+                "parameters": {
+                    "vmName": {
+                        "value": "[parameters('vmName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "fileUris": {
+                        "value": "[parameters('fileUris')]"
+                    },
+                    "arguments": {
+                        "value": "[parameters('arguments')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "sqlDataWarehoueSetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('sqlDataWareHouseSetupURL')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "sqlDWServerName": {
+                        "value": "[parameters('sqlDWServerName')]"
+                    },
+                    "sqlDWDBAdminName": {
+                        "value": "[parameters('sqlDWDBAdminName')]"
+                    },
+                    "sqlDWAdminPassword": {
+                        "value": "[parameters('sqlDWAdminPassword')]"
+                    },
+                    "sqlDWDBName": {
+                        "value": "[parameters('sqlDWDBName')]"
+                    },
+                    "serviceLevelObjective": {
+                        "value": "[parameters('serviceLevelObjective')]"
+                    },
+                    "startIpAddress": {
+                        "value": "[parameters('startIpAddress')]"
+                    },
+                    "endIpAddress": {
+                        "value": "[parameters('endIpAddress')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "createTableAutomationSetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "sqlDataWarehoueSetup"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('createTableAutomationSetupURL')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlDWServerName": {
+                        "value": "[parameters('sqlDWServerName')]"
+                    },
+                    "sqlDWDBAdminName": {
+                        "value": "[parameters('sqlDWDBAdminName')]"
+                    },
+                    "sqlDWAdminPassword": {
+                        "value": "[parameters('sqlDWAdminPassword')]"
+                    },
+                    "sqlDWDBName": {
+                        "value": "[parameters('sqlDWDBName')]"
+                    },
+                    "jobId": {
+                        "value": "[parameters('jobId')]"
+                    },
+                    "accountName": {
+                        "value": "[parameters('accountName')]"
+                    },
+                    "credentialName": {
+                        "value": "[parameters('credentialName')]"
+                    },
+                    "runbookName": {
+                        "value": "[parameters('runbookName')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "dataFactorySetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "sqlDataWarehoueSetup"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('adfSetupURL')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlDWServerName": {
+                        "value": "[parameters('sqlDWServerName')]"
+                    },
+                    "sqlDWDBAdminName": {
+                        "value": "[parameters('sqlDWDBAdminName')]"
+                    },
+                    "sqlDWAdminPassword": {
+                        "value": "[parameters('sqlDWAdminPassword')]"
+                    },
+                    "sqlDWDBName": {
+                        "value": "[parameters('sqlDWDBName')]"
+                    },
+                    "dataFactoryName": {
+                        "value": "[parameters('dataFactoryName')]"
+                    },
+                    "start": {
+                        "value": "[parameters('start')]"
+                    },
+                    "end": {
+                        "value": "[parameters('end')]"
+                    },
+                    "tableName": {
+                        "value": "[parameters('tableName')]"
+                    },
+                    "inputFolderPath": {
+                        "value": "[parameters('inputFolderPath')]"
+                    },
+                    "outputFolderPath": {
+                        "value": "[parameters('outputFolderPath')]"
+                    }
+                }
+            }
+        }
+    ]
+}
