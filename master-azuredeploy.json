@@ -219,6 +219,7 @@
         "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'sqldatawarehouse.json')]",
         "createTableAutomationSetupURL": "[concat(variables('armBaseUrl'),'createtableautomationjob.json')]",
         "adfSetupURL": "[concat(variables('armBaseUrl'),'azuredatafactory.json')]",
+        "apiVersion": "2015-10-01",
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
         "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
