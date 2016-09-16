@@ -56,16 +56,21 @@
         "description": "Name of the runbook"
       }
     }
+    
   },
   "variables": {
-    "automationjoblocation":"South Central US"
+    "location": "South Central US",
+    "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
+    "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
+    "runbookDescription": "Create a Database Table in User provided Datawarehouse",
+    "sku": "Basic"
   },
   "resources": [
     {
       "type": "Microsoft.Automation/automationAccounts",
       "name": "[parameters('accountName')]",
       "apiVersion": "2015-01-01-preview",
-      "location": "[variables('automationjoblocation')]",
+      "location": "[variables('location')]",
       "tags": {},
       "properties": {
         "sku": {
@@ -77,7 +82,7 @@
           "name": "[parameters('runbookName')]",
           "type": "runbooks",
           "apiVersion": "2015-01-01-preview",
-          "location": "[variables('automationjoblocation')]",
+          "location": "[variables('location')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
           ],
@@ -97,7 +102,7 @@
           "name": "[parameters('credentialName')]",
           "type": "credentials",
           "apiVersion": "2015-01-01-preview",
-          "location": "[variables('automationjoblocation')]",
+          "location": "[variables('location')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
           ],
@@ -111,7 +116,7 @@
           "name": "[concat(parameters('accountName'), '/', parameters('jobId'))]",
           "type": "Microsoft.Automation/automationAccounts/jobs",
           "apiVersion": "2015-10-31",
-          "location": "[variables('automationjoblocation')]",
+          "location": "[variables('location')]",
           "tags": {
             "key": "value"
           },
