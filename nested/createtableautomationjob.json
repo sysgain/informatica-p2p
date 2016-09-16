@@ -57,7 +57,9 @@
       }
     }
   },
-  "variables": {},
+  "variables": {
+    "automationjoblocation":"South Central US"
+  },
   "resources": [
     {
       "type": "Microsoft.Automation/automationAccounts",
