@@ -148,7 +148,7 @@
             "defaultValue": "01:00:00"
         }
     },
-    "variables": { },
+    "variables": {"storageApiVersion": "2015-06-15" },
     "resources": [
         {
             "name": "[parameters('dataFactoryName')]",
@@ -166,7 +166,7 @@
                     "properties": {
                         "type": "AzureStorage",
                         "typeProperties": {
-                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('adfstorageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('adfstorageAccountName')),parameters('apiVersion')).key1)]"
+                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('adfstorageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('adfstorageAccountName')),variables('storageApiVersion')).key1)]"
                         }
                     }
                 },
