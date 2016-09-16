@@ -227,24 +227,23 @@
         "sqlDWOutputDataset": "AzureSqlDWOutput",
         "azureSqlDWLinkedServiceConnectionString": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]",
         "clusterSize": 1,
-        "version": "3.2",
+        "version": "12.0",
         "timeToLive": "00:45:00",
         "frequency": "Hour",
         "interval": 1,
         "writeBatchSize": 0,
         "writeBatchTimeout": "00:00:00",
         "timeout": "01:00:00",
-          "automationjoblocation": "South Central US",
-    "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
-    "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
-    "runbookDescription": "Create a Database Table in User provided Datawarehouse",
-    "sku": "Basic",
-     "sql-api-version":"2014-04-01",
-     "sqldb-api-version":"2015-05-01-preview",
-       "sqlfirewallrules-api-version":"2014-04-01",
-         "collation":"SQL_Latin1_General_CP1_CI_AS",
-           "maxSizeBytes":"10995116277760",
-"version":"12.0",
+        "automationjoblocation": "South Central US",
+        "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
+        "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
+        "runbookDescription": "Create a Database Table in User provided Datawarehouse",
+        "sku": "Basic",
+        "sql-api-version": "2014-04-01",
+        "sqldb-api-version": "2015-05-01-preview",
+        "sqlfirewallrules-api-version": "2014-04-01",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": "10995116277760"
     },
     "resources": [
         {
@@ -580,24 +579,23 @@
                         "value": "[parameters('endIpAddress')]"
                     },
                     "sql-api-version": {
-           
-            "value": "[variables('sql-api-version')]"
-         },
-          "sqldb-api-version": {
-           "value": "[variables('sqldb-api-version')]"
-         },
-          "sqlfirewallrules-api-version": {
-            "value":  "[variables('sqlfirewallrules-api-version')]"
-         },
-          "collation": {
-           "value": "[variables('collation')]"
-         },
-          "maxSizeBytes": {
-           "value":  "[variables('maxSizeBytes')]"
-         },
-          "version": {
-           "value": "[variables('version')]"
-         }
+                        "value": "[variables('sql-api-version')]"
+                    },
+                    "sqldb-api-version": {
+                        "value": "[variables('sqldb-api-version')]"
+                    },
+                    "sqlfirewallrules-api-version": {
+                        "value": "[variables('sqlfirewallrules-api-version')]"
+                    },
+                    "collation": {
+                        "value": "[variables('collation')]"
+                    },
+                    "maxSizeBytes": {
+                        "value": "[variables('maxSizeBytes')]"
+                    },
+                    "version": {
+                        "value": "[variables('version')]"
+                    }
                 }
             }
         },
@@ -683,7 +681,7 @@
                     "inputFolderPath": {
                         "value": "[parameters('inputFolderPath')]"
                     },
-                     "adfstorageAccountName": {
+                    "adfstorageAccountName": {
                         "value": "[parameters('adfstorageAccountName')]"
                     },
                     "outputFolderPath": {
