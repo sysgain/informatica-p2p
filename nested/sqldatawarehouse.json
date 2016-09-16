@@ -63,7 +63,8 @@
         }
     },
     "variables": {
-         "sql-api-version": "2014-04-01"
+         "sql-api-version": "2014-04-01",
+         "sqldb-api-version": "2015-05-01-preview"
     },
     "resources": [
         {
