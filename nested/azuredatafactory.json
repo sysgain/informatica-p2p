@@ -84,7 +84,7 @@
             "defaultValue": "adfteststore234"
         }
     },
-    "variables": {},
+    "variables": {"apiVersion":"2015-10-01"},
     "resources": [
         {
             "name": "[parameters('dataFactoryName')]",
