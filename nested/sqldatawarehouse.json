@@ -62,7 +62,9 @@
             "defaultValue": "255.255.255.255"
         }
     },
-    "variables": {},
+    "variables": {
+         "sql-api-version": "2014-04-01"
+    },
     "resources": [
         {
             "name": "[parameters('sqlDWServerName')]",
