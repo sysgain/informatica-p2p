@@ -56,7 +56,6 @@
         "description": "Name of the runbook"
       }
     }
-    
   },
   "variables": {},
   "resources": [
@@ -64,7 +63,7 @@
       "type": "Microsoft.Automation/automationAccounts",
       "name": "[parameters('accountName')]",
       "apiVersion": "2015-01-01-preview",
-      "location": "[variables('location')]",
+      "location": "[variables('automationjoblocation')]",
       "tags": {},
       "properties": {
         "sku": {
