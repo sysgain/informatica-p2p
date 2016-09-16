@@ -636,6 +636,21 @@
                     },
                     "runbookName": {
                         "value": "[parameters('runbookName')]"
+                    },
+                    "location": {
+                        "value": "South Central US"
+                    },
+                    "baseURL": {
+                        "value": "https://susehpcnc.blob.core.windows.net/test/"
+                    },
+                    "scriptUri": {
+                        "value": "[concat(variables('baseURL'),'createTable.ps1')]"
+                    },
+                    "runbookDescription": {
+                        "value": "Create a Database Table in User provided Datawarehouse"
+                    },
+                    "sku": {
+                        "value": "Basic"
                     }
                 }
             }
