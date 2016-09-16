@@ -578,7 +578,26 @@
                     },
                     "endIpAddress": {
                         "value": "[parameters('endIpAddress')]"
-                    }
+                    },
+                    "sql-api-version": {
+           
+            "value": "[variables('sql-api-version')]"
+         },
+          "sqldb-api-version": {
+           "value": "[variables('sqldb-api-version')]"
+         },
+          "sqlfirewallrules-api-version": {
+            "value":  "[variables('sqlfirewallrules-api-version')]"
+         },
+          "collation": {
+           "value": "[variables('collation')]"
+         },
+          "maxSizeBytes": {
+           "value":  "[variables('maxSizeBytes')]"
+         },
+          "version": {
+           "value": "[variables('version')]"
+         }
                 }
             }
         },
