@@ -60,7 +60,33 @@
         "endIpAddress": {
             "type": "string",
             "defaultValue": "255.255.255.255"
-        }
+        },
+         "sql-api-version": {
+            "type": "string",
+            "defaultValue": "2014-04-01"
+         },
+          "sqldb-api-version": {
+            "type": "string",
+            "defaultValue": "2015-05-01-preview"
+         },
+          "sqlfirewallrules-api-version": {
+            "type": "string",
+            "defaultValue": "2014-04-01"
+         },
+          "collation": {
+            "type": "string",
+            "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
+         },
+          "maxSizeBytes": {
+            "type": "string",
+            "defaultValue": "10995116277760"
+         },
+          "version": {
+            "type": "string",
+            "defaultValue":"12.0"
+         },
+         
+         
     },
     "variables": {
         "sql-api-version": "2014-04-01",
@@ -75,30 +101,30 @@
             "name": "[parameters('sqlDWServerName')]",
             "type": "Microsoft.Sql/servers",
             "location": "[parameters('location')]",
-            "apiVersion": "[variables('sql-api-version')]",
+            "apiVersion": "[parameters('sql-api-version')]",
             "properties": {
                 "administratorLogin": "[parameters('sqlDWDBAdminName')]",
                 "administratorLoginPassword": "[parameters('sqlDWAdminPassword')]",
-                "version": "[variables('version')]"
+                "version": "[parameters('version')]"
             },
             "resources": [
                 {
                     "name": "[parameters('sqlDWDBName')]",
                     "type": "databases",
                     "location": "[parameters('location')]",
-                    "apiVersion": "[variables('sqldb-api-version')]",
+                    "apiVersion": "[parameters('sqldb-api-version')]",
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('sqlDWServerName'))]"
                     ],
                     "properties": {
                         "edition": "DataWarehouse",
-                        "collation": "[variables('collation')]",
-                        "maxSizeBytes": "[variables('maxSizeBytes')]",
+                        "collation": "[parameters('collation')]",
+                        "maxSizeBytes": "[parameters('maxSizeBytes')]",
                         "serviceLevelObjective": "[parameters('serviceLevelObjective')]"
                     }
                 },
                 {
-                    "apiVersion": "[variables('sqlfirewallrules-api-version')]",
+                    "apiVersion": "[parameters('sqlfirewallrules-api-version')]",
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('sqlDWServerName'))]"
                     ],
