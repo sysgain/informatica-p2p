@@ -1,0 +1,1 @@
+contains informatica-sqldatawarehouse-powerbi solution templates
