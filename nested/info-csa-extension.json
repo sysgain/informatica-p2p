@@ -11,11 +11,17 @@
     "fileUris": {
       "type": "string"
     },
-    "commandToExecute": {
-      "type": "string"
+    "arguments": {
+      "type": "securestring",
+      "defaultValue": " "
     }
   },
-  "variables": {},
+  "variables": {
+    "UriFileNamePieces": "[split(parameters('fileUris'), '/')]",
+    "firstFileNameString": "[variables('UriFileNamePieces')[sub(length(variables('UriFileNamePieces')), 1)]]",
+    "firstFileNameBreakString": "[split(variables('firstFileNameString'), '?')]",
+    "firstFileName": "[variables('firstFileNameBreakString')[0]]"
+  },
   "resources": [
     {
       "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
@@ -28,8 +34,10 @@
         "typeHandlerVersion": "1.7",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": "[parameters('fileUris')]",
-          "commandToExecute": "[parameters('commandToExecute')]"
+          "fileUris": "[split(parameters('fileUris'), ' ')]"
+        },
+        "protectedSettings": {
+          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('firstFileName'), ' ', parameters('arguments'))]"
         }
       }
     }
