@@ -84,9 +84,7 @@
           "version": {
             "type": "string",
             "defaultValue":"12.0"
-         },
-         
-         
+         }
     },
     "variables": {},
     "resources": [
