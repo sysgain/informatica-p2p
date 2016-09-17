@@ -616,7 +616,7 @@
                 },
                 "parameters": {
                     "sqlDWServerName": {
-                        "value": "[parameters('sqlDWServerName')]"
+                        "value": "[concat(parameters('sqlDWServerName'),'.database.windows.net')]"
                     },
                     "sqlDWDBAdminName": {
                         "value": "[parameters('sqlDWDBAdminName')]"
