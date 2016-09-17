@@ -112,7 +112,7 @@
         },
         "azureSqlDWLinkedServiceConnectionString": {
             "type": "string",
-            "defaultValue": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]"
+            "defaultValue": ""
         },
         "clusterSize": {
             "type": "int",
