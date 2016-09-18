@@ -756,9 +756,9 @@
         "timeout": {
 		"value": "[variables('timeout')]"
         },
-         "timeout": {
-		"value": "[parameters('timeout')]"
-        },
+         "script": {
+		"value": "[parameters('script')]"
+        }
         
                 }
             }
