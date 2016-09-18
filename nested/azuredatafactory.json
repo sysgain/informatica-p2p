@@ -145,7 +145,11 @@
         "timeout": {
             "type": "string",
             "defaultValue": "01:00:00"
-        }
+        },
+         "script": {
+         "type": "string",
+         "defaultValue": ""
+    }
     },
     "variables": {"storageApiVersion": "2015-06-15" },
     "resources": [
@@ -293,7 +297,7 @@
                             {
                                 "type": "HDInsightHive",
                                 "typeProperties": {
-                                    "scriptPath": "https://test909.blob.core.windows.net/infop2p/script/partitionweblogs.hql",
+                                    "script": "[parameters('script')]",
                                     "scriptLinkedService": "[parameters('storageLinkedServiceName')]",
                                     "defines": {
                                         "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/inputdata')]",
