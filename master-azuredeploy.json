@@ -184,7 +184,11 @@
             "metadata": {
                 "description": "pass in the username and password,use doublequotes around the arguments with spaces"
             }
-        }
+        },
+       "script": {
+	 "type": "string",
+      	"defaultValue": ""
+    }
     },
     "variables": {
         "storageAccName": "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]",
@@ -751,7 +755,11 @@
         },
         "timeout": {
 		"value": "[variables('timeout')]"
-        }
+        },
+         "timeout": {
+		"value": "[parameters('timeout')]"
+        },
+        
                 }
             }
         }
