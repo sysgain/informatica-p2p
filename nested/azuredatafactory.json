@@ -293,7 +293,7 @@
                             {
                                 "type": "HDInsightHive",
                                 "typeProperties": {
-                                    "scriptPath": "adfgetstarted/script/partitionweblogs.hql",
+                                    "scriptPath": "https://test909.blob.core.windows.net/infop2p/script/partitionweblogs.hql",
                                     "scriptLinkedService": "[parameters('storageLinkedServiceName')]",
                                     "defines": {
                                         "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/inputdata')]",
