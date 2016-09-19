@@ -230,7 +230,7 @@
         "blobInputDataset": "AzureBlobInput",
         "blobOutputDataset": "AzureBlobOutput",
         "sqlDWOutputDataset": "AzureSqlDWOutput",
-        "azureSqlDWLinkedServiceConnectionString": "[concat('Data Source=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDWDBName'),';Integrated Security=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connect Timeout=30;Encrypt=True')]",
+        "azureSqlDWLinkedServiceConnectionString": "[concat('Server=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Database=', parameters('sqlDWDBName'), ';Trusted_Connection=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connection Timeout=30;Encrypt=True')]",
         "clusterSize": 1,
         "version": "3.2",
         "sql-version":"12.0",
