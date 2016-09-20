@@ -79,19 +79,25 @@
                 "description": " public IP dns prefix"
             }
         },
-        "fileUris": {
+        "armBaseUrl": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/scripts/ICExtentionScript.ps1"
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master",
+            "metadata": {
+                "description": "Base URl for dependent templates/scripts"
+            }
         },
         "arguments": {
             "type": "string",
             "metadata": {
-                "description": "pass in the username and password,use doublequotes around the arguments with spaces"
+                "description": "Pass in the username and password. Use doublequotes around the arguments with spaces"
             }
         },
         "script": {
             "type": "string",
-            "defaultValue": ""
+            "defaultValue": "",
+            "metadata": {
+                "description": "Hive query inline script"
+            }
         }
     },
     "variables": {
@@ -133,17 +139,17 @@
         "storageApiVersion": "2015-06-15",
         "networkApiVersion": "2015-06-15",
         "computeApiVersion": "2015-06-15",
-        "armBaseUrl": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/nested/",
-        "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'public-ip.json')]",
-        "storageAccountUrl": "[concat(variables('armBaseUrl'),'storage.json')]",
-        "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'vnet-subnet.json')]",
-        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'network-interface.json')]",
-        "networkSecurityGroupUrl": "[concat(variables('armBaseUrl'),'info-nsg.json')]",
-        "virtualMachineUrl": "[concat(variables('armBaseUrl'),'virtual-machine-with-plan.json')]",
-        "virtualMachineExtUrl": "[concat(variables('armBaseUrl'),'info-csa-extension.json')]",
-        "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'sqldatawarehouse.json')]",
-        "createTableAutomationSetupURL": "[concat(variables('armBaseUrl'),'createtableautomationjob.json')]",
-        "adfSetupURL": "[concat(variables('armBaseUrl'),'azuredatafactory.json')]",
+        "publicIpAddressUrl": "[concat(parameters('armBaseUrl'),'/nested/public-ip.json')]",
+        "storageAccountUrl": "[concat(parameters('armBaseUrl'),'/nested/storage.json')]",
+        "virtualNetworkUrl": "[concat(parameters('armBaseUrl'),'/nested/vnet-subnet.json')]",
+        "networkInterfaceUrl": "[concat(parameters('armBaseUrl'),'/nested/network-interface.json')]",
+        "networkSecurityGroupUrl": "[concat(parameters('armBaseUrl'),'/nested/info-nsg.json')]",
+        "virtualMachineUrl": "[concat(parameters('armBaseUrl'),'/nested/virtual-machine-with-plan.json')]",
+        "virtualMachineExtUrl": "[concat(parameters('armBaseUrl'),'/nested/info-csa-extension.json')]",
+        "sqlDataWareHouseSetupURL": "[concat(parameters('armBaseUrl'),'/nested/sqldatawarehouse.json')]",
+        "createTableAutomationSetupURL": "[concat(parameters('armBaseUrl'),'/nested/createtableautomationjob.json')]",
+        "adfSetupURL": "[concat(parameters('armBaseUrl'),'/nested/azuredatafactory.json')]",
+        "fileUris": "[concat(parameters('armBaseUrl'),'/scripts/ICExtentionScript.ps1')]",
         "apiVersion": "2015-10-01",
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
@@ -463,7 +469,7 @@
                         "value": "[parameters('location')]"
                     },
                     "fileUris": {
-                        "value": "[parameters('fileUris')]"
+                        "value": "[variables('fileUris')]"
                     },
                     "arguments": {
                         "value": "[parameters('arguments')]"
@@ -686,4 +692,3 @@
         }
     ]
 }
-
