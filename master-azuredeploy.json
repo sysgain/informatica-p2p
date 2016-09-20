@@ -4,21 +4,21 @@
     "parameters": {
         "location": {
             "type": "string",
-            "defaultValue": "East US",
+            "defaultValue": "eastus",
             "allowedValues": [
-                "East US",
-                "East US 2",
-                "North Central US",
-                "South Central US",
-                "West US",
-                "North Europe",
-                "West Europe",
-                "East Asia",
-                "Southeast Asia",
-                "Japan East",
-                "Japan West",
-                "Australia East",
-                "Australia Southeast"
+                "eastus",
+                "eastus2",
+                "northcentralus",
+                "southcentralus",
+                "westus",
+                "northeurope",
+                "westeurope",
+                "eastasia",
+                "southeastasia",
+                "japaneast",
+                "japanwest",
+                "australiaeast",
+                "australiasoutheast"
             ],
             "metadata": {
                 "description": "Deployment location"
@@ -27,7 +27,7 @@
         "sqlDWDBAdminName": {
             "type": "string",
             "metadata": {
-                "description": "SQL Datawarehouse Admin Name"
+                "description": "SQL Datawarehouse Admin User Name"
             }
         },
         "sqlDWAdminPassword": {
@@ -40,7 +40,7 @@
             "type": "string",
             "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "use https://www.guidgenerator.com to generate unique jobid"
+                "description": "Job Id of the automation Job, use https://www.guidgenerator.com to generate unique jobid"
             }
         },
         "start": {
@@ -52,7 +52,7 @@
         "end": {
             "type": "string",
             "metadata": {
-                "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
+                "description": "end time of the data slice. ex: 2014-06-01T18:00:00"
             }
         },
         "tag": {
@@ -100,7 +100,7 @@
         "serviceLevelObjective": "DW100",
         "startIpAddress": "0.0.0.0",
         "endIpAddress": "255.255.255.255",
-        "accountName": "accountaccess",
+        "automationAccountName": "accountaccess",
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
@@ -113,6 +113,7 @@
         "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
         "adfstorageAccName": "[concat(variables('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "sqlDWServerName": "[concat(variables('sqlDWServName'),uniqueString(resourceGroup().id))]",
+        "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
         "dataFactoryName": "[concat(variables('dataFactName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(variables('vmName'),'-publicIp')]",
         "vnetName": "[concat(variables('vmName'),'-vnet')]",
@@ -162,7 +163,7 @@
         "timeout": "01:00:00",
         "automationjoblocation": "South Central US",
         "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
-        "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
+        "automationScriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
         "runbookDescription": "Create a Database Table in User provided Datawarehouse",
         "sku": "Basic",
         "sqldwlocation": "South Central US",
@@ -565,19 +566,19 @@
                         "value": "[variables('runbookName')]"
                     },
                     "location": {
-                        "value": "South Central US"
+                        "value": "[variables('automationjoblocation')]"
                     },
                     "baseURL": {
                         "value": "https://susehpcnc.blob.core.windows.net/test/"
                     },
                     "scriptUri": {
-                        "value": "[concat(variables('baseURL'),'createTable.ps1')]"
+                        "value": "[variables('automationScriptUri')]"
                     },
                     "runbookDescription": {
-                        "value": "Create a Database Table in User provided Datawarehouse"
+                        "value":"[variables('runbookDescription')]"
                     },
                     "sku": {
-                        "value": "Basic"
+                        "value":"[variables('sku')]"
                     }
                 }
             }
