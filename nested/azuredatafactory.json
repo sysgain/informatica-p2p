@@ -11,22 +11,6 @@
         "location": {
             "type": "string",
             "defaultValue": "eastus",
-            "allowedValues": [
-                "East US",
-                "eastus",
-                "East US 2",
-                "North Central US",
-                "South Central US",
-                "West US",
-                "North Europe",
-                "West Europe",
-                "East Asia",
-                "Southeast Asia",
-                "Japan East",
-                "Japan West",
-                "Australia East",
-                "Australia Southeast"
-            ],
             "metadata": {
                 "description": "The location where all azure resources will be deployed."
             }
