@@ -7,7 +7,6 @@
             "defaultValue": "East US",
             "allowedValues": [
                 "East US",
-                "eastus",
                 "East US 2",
                 "North Central US",
                 "South Central US",
