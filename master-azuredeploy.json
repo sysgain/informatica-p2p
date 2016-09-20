@@ -4,7 +4,7 @@
     "parameters": {
         "location": {
             "type": "string",
-            "defaultValue": "eastus",
+            "defaultValue": "East US",
             "allowedValues": [
                 "East US",
                 "eastus",
@@ -23,12 +23,6 @@
             ],
             "metadata": {
                 "description": "The location where all azure resources will be deployed."
-            }
-        },
-        "sqlDWServerName": {
-            "type": "string",
-            "metadata": {
-                "description": "SQL Datawarehouse Server Name, should be a unique name"
             }
         },
         "sqlDWDBAdminName": {
@@ -50,25 +44,6 @@
                 "description": "SQL Datawarehouse Database Name"
             }
         },
-        "serviceLevelObjective": {
-            "type": "string",
-            "defaultValue": "DW100",
-            "allowedValues": [
-                "DW100",
-                "DW100",
-                "DW200",
-                "DW300",
-                "DW400",
-                "DW500",
-                "DW600",
-                "DW1000",
-                "DW1200",
-                "DW1500",
-                "DW2000",
-                "DW3000",
-                "DW6000"
-            ]
-        },
         "startIpAddress": {
             "type": "string",
             "defaultValue": "0.0.0.0"
@@ -82,25 +57,6 @@
             "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
                 "description": "Unique GUID"
-            }
-        },
-        "accountName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the automation account. It should be unique"
-            }
-        },
-        "credentialName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name for credentials"
-            }
-        },
-        "runbookName": {
-            "type": "string",
-            "defaultValue": "createtable",
-            "metadata": {
-                "description": "Name of the runbook"
             }
         },
         "dataFactoryName": {
@@ -121,29 +77,10 @@
                 "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
             }
         },
-        "tableName": {
-            "type": "string",
-            "defaultValue": "bi9"
-        },
-        "inputFolderPath": {
-            "type": "string",
-            "defaultValue": "adfgetstarted/inputdata"
-        },
-        "outputFolderPath": {
-            "type": "string",
-            "defaultValue": "adfgetstarted/partitioneddata"
-        },
         "tag": {
             "type": "object",
             "defaultValue": {
                 "value1": "informatica"
-            }
-        },
-        "vmName": {
-            "type": "string",
-            "defaultValue": "informatica",
-            "metadata": {
-                "description": " Virtual machine name"
             }
         },
         "adminUsername": {
@@ -158,17 +95,7 @@
                 "description": " adminpassword for vm"
             }
         },
-        "storageAccountName": {
-            "type": "string",
-            "defaultValue": "infosa",
-            "metadata": {
-                "description": "Storage Account name"
-            }
-        },
-        "adfstorageAccountName": {
-            "type": "string",
-            "defaultValue": "adfteststore234"
-        },
+      
         "publicIPdnsPrefix": {
             "type": "string",
             "metadata": {
@@ -191,6 +118,18 @@
     }
     },
     "variables": {
+    	 "sqlDWServerName":"sqlserver123",
+    	 "sqlDWDBName":"sysgaindatabase",
+    	 "serviceLevelObjective":"DW100",
+    	   "accountName":"accountaccess",
+    	   "credentialName":"aocred",
+    	   "runbookname":"createtable",
+    	     "tableName":"bi9",
+    	     "inputFolderPath":"adfgetstarted/inputdata",
+    	      "outputFolderPath":"adfgetstarted/partitioneddata",
+    	      "vmName":"informatica",
+    	        "storageAccountName":"infosa",
+                  "adfstorageAccountName": "adfteststore234",
         "storageAccName": "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]",
         "adfstorageAccName": "[concat(parameters('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(parameters('vmName'),'-publicIp')]",
