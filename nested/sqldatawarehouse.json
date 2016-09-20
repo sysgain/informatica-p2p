@@ -37,21 +37,6 @@
         "serviceLevelObjective": {
             "type": "string",
             "defaultValue": "DW100",
-            "allowedValues": [
-                "DW100",
-                "DW100",
-                "DW200",
-                "DW300",
-                "DW400",
-                "DW500",
-                "DW600",
-                "DW1000",
-                "DW1200",
-                "DW1500",
-                "DW2000",
-                "DW3000",
-                "DW6000"
-            ]
         },
         "startIpAddress": {
             "type": "string",
