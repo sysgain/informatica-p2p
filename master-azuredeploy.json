@@ -96,7 +96,7 @@
         }
     },
     "variables": {
-        "sqlDWServName": "Seqserver",
+        "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
         "serviceLevelObjective": "DW100",
         "startIpAddress": "0.0.0.0",
@@ -104,16 +104,17 @@
         "accountName": "accountaccess",
         "credentialName": "aocred",
         "runbookName": "createtable",
-        "dataFactoryName": "datafact",
+        "dataFactName": "adf",
         "tableName": "bi9",
         "inputFolderPath": "adfgetstarted/inputdata",
         "outputFolderPath": "adfgetstarted/partitioneddata",
         "vmName": "informatica",
         "storageAccountName": "infosa",
-        "adfstorageAccountName": "adfteststore234",
+        "adfstorageAccountName": "adfsa",
         "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
         "adfstorageAccName": "[concat(variables('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "sqlDWServerName": "[concat(variables('sqlDWServName'),uniqueString(resourceGroup().id))]",
+        "dataFactoryName": "[concat(variables('dataFactName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(variables('vmName'),'-publicIp')]",
         "vnetName": "[concat(variables('vmName'),'-vnet')]",
         "networkInterfaceName": "[concat(variables('vmName'),'-nic')]",
@@ -685,3 +686,4 @@
         }
     ]
 }
+
