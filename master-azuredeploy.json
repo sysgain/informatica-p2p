@@ -4,7 +4,7 @@
     "parameters": {
         "location": {
             "type": "string",
-            "defaultValue": "eastus",
+            "defaultValue": "East US",
             "allowedValues": [
                 "East US",
                 "eastus",
@@ -22,13 +22,7 @@
                 "Australia Southeast"
             ],
             "metadata": {
-                "description": "The location where all azure resources will be deployed."
-            }
-        },
-        "sqlDWServerName": {
-            "type": "string",
-            "metadata": {
-                "description": "SQL Datawarehouse Server Name, should be a unique name"
+                "description": "Deployment location"
             }
         },
         "sqlDWDBAdminName": {
@@ -43,70 +37,11 @@
                 "description": "SQL Datawarehouse Admin password. Ex: Testadmin@123"
             }
         },
-        "sqlDWDBName": {
-            "type": "string",
-            "defaultValue": "testdwdb",
-            "metadata": {
-                "description": "SQL Datawarehouse Database Name"
-            }
-        },
-        "serviceLevelObjective": {
-            "type": "string",
-            "defaultValue": "DW100",
-            "allowedValues": [
-                "DW100",
-                "DW100",
-                "DW200",
-                "DW300",
-                "DW400",
-                "DW500",
-                "DW600",
-                "DW1000",
-                "DW1200",
-                "DW1500",
-                "DW2000",
-                "DW3000",
-                "DW6000"
-            ]
-        },
-        "startIpAddress": {
-            "type": "string",
-            "defaultValue": "0.0.0.0"
-        },
-        "endIpAddress": {
-            "type": "string",
-            "defaultValue": "255.255.255.255"
-        },
         "jobId": {
             "type": "string",
             "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "Unique GUID"
-            }
-        },
-        "accountName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the automation account. It should be unique"
-            }
-        },
-        "credentialName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name for credentials"
-            }
-        },
-        "runbookName": {
-            "type": "string",
-            "defaultValue": "createtable",
-            "metadata": {
-                "description": "Name of the runbook"
-            }
-        },
-        "dataFactoryName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the data factory. It must be globally unique"
+                "description": "use https://www.guidgenerator.com to generate unique jobid"
             }
         },
         "start": {
@@ -121,53 +56,23 @@
                 "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
             }
         },
-        "tableName": {
-            "type": "string",
-            "defaultValue": "bi9"
-        },
-        "inputFolderPath": {
-            "type": "string",
-            "defaultValue": "adfgetstarted/inputdata"
-        },
-        "outputFolderPath": {
-            "type": "string",
-            "defaultValue": "adfgetstarted/partitioneddata"
-        },
         "tag": {
             "type": "object",
             "defaultValue": {
                 "value1": "informatica"
             }
         },
-        "vmName": {
-            "type": "string",
-            "defaultValue": "informatica",
-            "metadata": {
-                "description": " Virtual machine name"
-            }
-        },
         "adminUsername": {
             "type": "string",
             "metadata": {
-                "description": "adminusername to login into vm"
+                "description": "username to login into informatica vm"
             }
         },
         "adminPassword": {
             "type": "securestring",
             "metadata": {
-                "description": " adminpassword for vm"
+                "description": "password to login into informatica vm"
             }
-        },
-        "storageAccountName": {
-            "type": "string",
-            "defaultValue": "infosa",
-            "metadata": {
-                "description": "Storage Account name"
-            }
-        },
-        "adfstorageAccountName": {
-            "type": "string",
-            "defaultValue": "adfteststore234"
         },
         "publicIPdnsPrefix": {
             "type": "string",
@@ -185,18 +90,34 @@
                 "description": "pass in the username and password,use doublequotes around the arguments with spaces"
             }
         },
-       "script": {
-	 "type": "string",
-      	"defaultValue": ""
-    }
+        "script": {
+            "type": "string",
+            "defaultValue": ""
+        }
     },
     "variables": {
-        "storageAccName": "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]",
-        "adfstorageAccName": "[concat(parameters('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
-        "pubicIPAddressName": "[concat(parameters('vmName'),'-publicIp')]",
-        "vnetName": "[concat(parameters('vmName'),'-vnet')]",
-        "networkInterfaceName": "[concat(parameters('vmName'),'-nic')]",
-        "networkSecurityGroupsName": "[concat(parameters('vmName'),'-nsg')]",
+        "sqlDWServName": "Seqserver",
+        "sqlDWDBName": "testdwdb",
+        "serviceLevelObjective": "DW100",
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255",
+        "accountName": "accountaccess",
+        "credentialName": "aocred",
+        "runbookName": "createtable",
+        "dataFactoryName": "datafact",
+        "tableName": "bi9",
+        "inputFolderPath": "adfgetstarted/inputdata",
+        "outputFolderPath": "adfgetstarted/partitioneddata",
+        "vmName": "informatica",
+        "storageAccountName": "infosa",
+        "adfstorageAccountName": "adfteststore234",
+        "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
+        "adfstorageAccName": "[concat(variables('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
+        "sqlDWServerName": "[concat(variables('sqlDWServName'),uniqueString(resourceGroup().id))]",
+        "pubicIPAddressName": "[concat(variables('vmName'),'-publicIp')]",
+        "vnetName": "[concat(variables('vmName'),'-vnet')]",
+        "networkInterfaceName": "[concat(variables('vmName'),'-nic')]",
+        "networkSecurityGroupsName": "[concat(variables('vmName'),'-nsg')]",
         "subnet1Name": "subnet1",
         "vnetAddressPrefix": "10.2.0.0/16",
         "subnet1Prefix": "10.2.0.0/24",
@@ -212,7 +133,6 @@
         "networkApiVersion": "2015-06-15",
         "computeApiVersion": "2015-06-15",
         "armBaseUrl": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/nested/",
-        "armComponentUrl": "https://raw.githubusercontent.com/sysgain/arm-components/",
         "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'public-ip.json')]",
         "storageAccountUrl": "[concat(variables('armBaseUrl'),'storage.json')]",
         "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'vnet-subnet.json')]",
@@ -230,10 +150,10 @@
         "blobInputDataset": "AzureBlobInput",
         "blobOutputDataset": "AzureBlobOutput",
         "sqlDWOutputDataset": "AzureSqlDWOutput",
-        "azureSqlDWLinkedServiceConnectionString": "[concat('Server=tcp:',parameters('sqlDWServerName'),'.database.windows.net,1433;Database=', parameters('sqlDWDBName'), ';Trusted_Connection=False;User ID=',parameters('sqlDWDBAdminName'),'@',parameters('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connection Timeout=30;Encrypt=True')]",
+        "azureSqlDWLinkedServiceConnectionString": "[concat('Server=tcp:',variables('sqlDWServerName'),'.database.windows.net,1433;Database=', variables('sqlDWDBName'), ';Trusted_Connection=False;User ID=',parameters('sqlDWDBAdminName'),'@',variables('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connection Timeout=30;Encrypt=True')]",
         "clusterSize": 1,
         "version": "3.2",
-        "sql-version":"12.0",
+        "sql-version": "12.0",
         "timeToLive": "00:45:00",
         "frequency": "Hour",
         "interval": 1,
@@ -245,7 +165,7 @@
         "scriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
         "runbookDescription": "Create a Database Table in User provided Datawarehouse",
         "sku": "Basic",
-        "sqldwlocation":"South Central US",
+        "sqldwlocation": "South Central US",
         "sql-api-version": "2014-04-01",
         "sqldb-api-version": "2015-05-01-preview",
         "sqlfirewallrules-api-version": "2014-04-01",
@@ -338,7 +258,7 @@
                         "value": "[variables('storageAccountType')]"
                     },
                     "storageAccountName": {
-                        "value": "[parameters('adfstorageAccountName')]"
+                        "value": "[variables('adfstorageAccName')]"
                     },
                     "tag": {
                         "value": {
@@ -481,7 +401,7 @@
                         "value": "[variables('computeApiVersion')]"
                     },
                     "vmName": {
-                        "value": "[parameters('vmName')]"
+                        "value": "[variables('vmName')]"
                     },
                     "storageAccountName": {
                         "value": "[variables('storageAccName')]"
@@ -536,7 +456,7 @@
                 },
                 "parameters": {
                     "vmName": {
-                        "value": "[parameters('vmName')]"
+                        "value": "[variables('vmName')]"
                     },
                     "location": {
                         "value": "[parameters('location')]"
@@ -565,7 +485,7 @@
                         "value": "[variables('sqldwlocation')]"
                     },
                     "sqlDWServerName": {
-                        "value": "[parameters('sqlDWServerName')]"
+                        "value": "[variables('sqlDWServerName')]"
                     },
                     "sqlDWDBAdminName": {
                         "value": "[parameters('sqlDWDBAdminName')]"
@@ -574,16 +494,16 @@
                         "value": "[parameters('sqlDWAdminPassword')]"
                     },
                     "sqlDWDBName": {
-                        "value": "[parameters('sqlDWDBName')]"
+                        "value": "[variables('sqlDWDBName')]"
                     },
                     "serviceLevelObjective": {
-                        "value": "[parameters('serviceLevelObjective')]"
+                        "value": "[variables('serviceLevelObjective')]"
                     },
                     "startIpAddress": {
-                        "value": "[parameters('startIpAddress')]"
+                        "value": "[variables('startIpAddress')]"
                     },
                     "endIpAddress": {
-                        "value": "[parameters('endIpAddress')]"
+                        "value": "[variables('endIpAddress')]"
                     },
                     "sql-api-version": {
                         "value": "[variables('sql-api-version')]"
@@ -621,7 +541,7 @@
                 },
                 "parameters": {
                     "sqlDWServerName": {
-                        "value": "[parameters('sqlDWServerName')]"
+                        "value": "[variables('sqlDWServerName')]"
                     },
                     "sqlDWDBAdminName": {
                         "value": "[parameters('sqlDWDBAdminName')]"
@@ -630,19 +550,19 @@
                         "value": "[parameters('sqlDWAdminPassword')]"
                     },
                     "sqlDWDBName": {
-                        "value": "[parameters('sqlDWDBName')]"
+                        "value": "[variables('sqlDWDBName')]"
                     },
                     "jobId": {
                         "value": "[parameters('jobId')]"
                     },
                     "accountName": {
-                        "value": "[parameters('accountName')]"
+                        "value": "[variables('accountName')]"
                     },
                     "credentialName": {
-                        "value": "[parameters('credentialName')]"
+                        "value": "[variables('credentialName')]"
                     },
                     "runbookName": {
-                        "value": "[parameters('runbookName')]"
+                        "value": "[variables('runbookName')]"
                     },
                     "location": {
                         "value": "South Central US"
@@ -677,7 +597,7 @@
                 },
                 "parameters": {
                     "sqlDWServerName": {
-                        "value": "[parameters('sqlDWServerName')]"
+                        "value": "[variables('sqlDWServerName')]"
                     },
                     "sqlDWDBAdminName": {
                         "value": "[parameters('sqlDWDBAdminName')]"
@@ -686,10 +606,10 @@
                         "value": "[parameters('sqlDWAdminPassword')]"
                     },
                     "sqlDWDBName": {
-                        "value": "[parameters('sqlDWDBName')]"
+                        "value": "[variables('sqlDWDBName')]"
                     },
                     "dataFactoryName": {
-                        "value": "[parameters('dataFactoryName')]"
+                        "value": "[variables('dataFactoryName')]"
                     },
                     "start": {
                         "value": "[parameters('start')]"
@@ -698,69 +618,68 @@
                         "value": "[parameters('end')]"
                     },
                     "tableName": {
-                        "value": "[parameters('tableName')]"
+                        "value": "[variables('tableName')]"
                     },
                     "inputFolderPath": {
-                        "value": "[parameters('inputFolderPath')]"
+                        "value": "[variables('inputFolderPath')]"
                     },
                     "adfstorageAccountName": {
-                        "value": "[parameters('adfstorageAccountName')]"
+                        "value": "[variables('adfstorageAccName')]"
                     },
                     "outputFolderPath": {
-                        "value": "[parameters('outputFolderPath')]"
+                        "value": "[variables('outputFolderPath')]"
                     },
-                  "apiVersion": {
-			             "value": "[variables('apiVersion')]"
+                    "apiVersion": {
+                        "value": "[variables('apiVersion')]"
                     },
                     "storageLinkedServiceName": {
-                         "value": "[variables('storageLinkedServiceName')]"
+                        "value": "[variables('storageLinkedServiceName')]"
                     },
                     "hdInsightOnDemandLinkedServiceName": {
-		                 "value": "[variables('hdInsightOnDemandLinkedServiceName')]"
-                     },
+                        "value": "[variables('hdInsightOnDemandLinkedServiceName')]"
+                    },
                     "azureSqlDWLinkedServiceName": {
-                         "value": "[variables('azureSqlDWLinkedServiceName')]"
-                     },
-                     "blobInputDataset": {
-                         "value": "[variables('blobInputDataset')]"
-                     },
-                     "blobOutputDataset": {
-                         "value": "[variables('blobOutputDataset')]"
-                      },
+                        "value": "[variables('azureSqlDWLinkedServiceName')]"
+                    },
+                    "blobInputDataset": {
+                        "value": "[variables('blobInputDataset')]"
+                    },
+                    "blobOutputDataset": {
+                        "value": "[variables('blobOutputDataset')]"
+                    },
                     "sqlDWOutputDataset": {
-                          "value": "[variables('sqlDWOutputDataset')]"
-                     },
-                     "azureSqlDWLinkedServiceConnectionString": {
-                          "value": "[variables('azureSqlDWLinkedServiceConnectionString')]"
-                     },
-                     "clusterSize": {
-	                    	"value": "[variables('clusterSize')]"
-                      },
-                     "version": {
-	                    	"value": "[variables('version')]"
-                      },
-                      "timeToLive": {
-		                    "value": "[variables('timeToLive')]"
-                     },
+                        "value": "[variables('sqlDWOutputDataset')]"
+                    },
+                    "azureSqlDWLinkedServiceConnectionString": {
+                        "value": "[variables('azureSqlDWLinkedServiceConnectionString')]"
+                    },
+                    "clusterSize": {
+                        "value": "[variables('clusterSize')]"
+                    },
+                    "version": {
+                        "value": "[variables('version')]"
+                    },
+                    "timeToLive": {
+                        "value": "[variables('timeToLive')]"
+                    },
                     "frequency": {
-	                    	"value": "[variables('frequency')]"
-                      },
+                        "value": "[variables('frequency')]"
+                    },
                     "interval": {
-		                     "value": "[variables('interval')]"
-                     },
-                     "writeBatchSize": {
-                               "value": "[variables('writeBatchSize')]"
-                      },
-                      "writeBatchTimeout": {
-		                    "value": "[variables('writeBatchTimeout')]"
-                      },
-                      "timeout": {
-	                    	"value": "[variables('timeout')]"
-                      },
-                      "script": {
-	                    	"value": "[parameters('script')]"
-                      }
-        
+                        "value": "[variables('interval')]"
+                    },
+                    "writeBatchSize": {
+                        "value": "[variables('writeBatchSize')]"
+                    },
+                    "writeBatchTimeout": {
+                        "value": "[variables('writeBatchTimeout')]"
+                    },
+                    "timeout": {
+                        "value": "[variables('timeout')]"
+                    },
+                    "script": {
+                        "value": "[parameters('script')]"
+                    }
                 }
             }
         }
