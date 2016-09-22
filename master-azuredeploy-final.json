@@ -770,7 +770,7 @@
                         "value": "[variables('adfstorageAccName')]"
                     },
                     "adfStorageAccKey": {
-                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.key1]"
+                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.value]"
                     }
                 }
             }
