@@ -17,15 +17,12 @@
             "type": "string"
         },
         "credential1Name": {
-            "defaultValue": "Azure_RM_Account_Credentials",
             "type": "string"
         },
         "cred1Username": {
-            "defaultValue": "aocred@sysgain.com",
             "type": "string"
         },
         "cred1Password": {
-            "defaultValue": "aocred@sysgain.com",
             "type": "securestring"
         },
         "jobId": {
@@ -51,7 +48,7 @@
             }
         },
         "runbookUrl": {
-            "defaultValue": "---- ",
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/runbooks/info-restapi-workflow.ps1",
             "type": "string"
         },
         "tag": {
@@ -86,6 +83,12 @@
             "type": "string"
         },
         "client_id": {
+            "type": "string"
+        },
+        "adfStorageAccName": {
+            "type": "string"
+        },
+        "adfStorageAccKey": {
             "type": "string"
         }
     },
@@ -197,7 +200,10 @@
                             "user_name": "[parameters('informatica_user_name')]",
                             "user_password": "[parameters('informatica_user_password')]",
                             "client_id": "[parameters('client_id')]",
-                            "informatica_csa_vmname": "[parameters('informatica_csa_vmname')]"
+                            "informatica_csa_vmname": "[parameters('informatica_csa_vmname')]",
+                            "adfStorageAccName": "[parameters('adfstorageAccName')]",
+                            "adfStorageAccKey": "[parameters('adfStorageAccKey')]",
+                            "credentialName": "[parameters('credential1Name')]"
                         }
                     },
                     "dependsOn": [
