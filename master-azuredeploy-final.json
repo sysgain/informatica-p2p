@@ -724,6 +724,9 @@
                     "automationAccountName": {
                         "value": "[variables('wfaAtomationAccountName')]"
                     },
+                    "credential1Name": {
+                        "value": "[variables('credential1Name')]"
+                    },
                     "cred1Username": {
                         "value": "[parameters('azure_Rm_Username')]"
                     },
