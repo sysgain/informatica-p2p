@@ -281,7 +281,7 @@
                             {
                                 "type": "HDInsightHive",
                                 "typeProperties": {
-                                    "script": "[parameters('script')]",
+                                    "scriptPath": "adfgetstarted/script/hiveinfop2p.hql",
                                     "scriptLinkedService": "[parameters('storageLinkedServiceName')]",
                                     "defines": {
                                         "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/inputdata')]",
