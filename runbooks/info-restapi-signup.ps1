@@ -42,7 +42,7 @@
         $user_title,
 
         [Parameter(Mandatory=$true)]
-        [string]
+        [long]
         $user_phone,
 
         [Parameter(Mandatory=$true)]
@@ -62,7 +62,7 @@
         $org_state,
 
         [Parameter(Mandatory=$true)]
-        [string]
+        [long]
         $org_zipcode,
 
         [Parameter(Mandatory=$true)]
