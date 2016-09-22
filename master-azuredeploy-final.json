@@ -27,13 +27,13 @@
         "sqlDWDBAdminName": {
             "type": "string",
             "metadata": {
-                "description": "SQL Datawarehouse Admin User Name"
+                "description": "SQL Datawarehouse Admin Username"
             }
         },
         "sqlDWAdminPassword": {
             "type": "securestring",
             "metadata": {
-                "description": "SQL Datawarehouse Admin password. Ex: Testadmin@123"
+                "description": "SQL Datawarehouse Admin password ex: Sysgain@123"
             }
         },
         "jobId": {
@@ -52,7 +52,7 @@
         "end": {
             "type": "string",
             "metadata": {
-                "description": "end time of the data slice. ex: 2014-06-01T18:00:00"
+                "description": "End time of the data slice. ex: 2014-06-01T18:00:00"
             }
         },
         "tag": {
@@ -61,58 +61,183 @@
                 "value1": "informatica"
             }
         },
-        "adminUsername": {
+        "adminUsername_informatica_vm": {
             "type": "string",
             "metadata": {
-                "description": "username to login into informatica vm"
+                "description": "Username to login into informatica vm"
             }
         },
-        "adminPassword": {
+        "adminPassword_informatica_vm": {
             "type": "securestring",
             "metadata": {
-                "description": "password to login into informatica vm"
+                "description": "Password to login into informatica vm"
             }
         },
         "publicIPdnsPrefix": {
             "type": "string",
             "metadata": {
-                "description": " public IP dns prefix"
+                "description": " Public IP dns prefix"
             }
         },
-        "armBaseUrl": {
-            "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master",
-            "metadata": {
-                "description": "Base URl for dependent templates/scripts"
-            }
-        },
-        "arguments": {
-            "type": "string",
-            "metadata": {
-                "description": "Pass in the username and password. Use doublequotes around the arguments with spaces"
-            }
-        },
-        "script": {
+        "hivescript": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
                 "description": "Hive query inline script"
             }
+        },
+        "automation_Location": {
+            "type": "string",
+            "defaultValue": "East US 2",
+            "allowedValues": [
+                "Japan East",
+                "North Europe",
+                "South Central US",
+                "West Europe",
+                "Southeast Asia",
+                "East US 2"
+            ],
+            "metadata": {
+                "description": "Automation Service Location"
+            }
+        },
+        "azure_Rm_Username": {
+            "type": "string",
+            "metadata": {
+                "description": "Azure RM Username"
+            }
+        },
+        "azure_Rm_Password": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Azure RM Password"
+            }
+        },
+        "sysgain_ms_email": {
+            "type": "string",
+            "metadata": {
+                "description": "Sysgain microservice emails"
+            }
+        },
+        "sysgain_ms_password": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Sysgain microservice password"
+            }
+        },
+        "user_email": {
+            "type": "string",
+            "metadata": {
+                "description": "Informatica Cloud email id"
+            }
+        },
+        "informatica_user_name": {
+            "type": "string",
+            "metadata": {
+                "description": "Informatica Cloud username"
+            }
+        },
+        "informatica_user_password": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Informatica Cloud password"
+            }
+        },
+        "user_firstname": {
+            "type": "string",
+            "metadata": {
+                "description": "First name for Informatica Sign up"
+            }
+        },
+        "user_lastname": {
+            "type": "string",
+            "metadata": {
+                "description": "Last name for Informatica Sign up"
+            }
+        },
+        "user_title": {
+            "type": "string",
+            "metadata": {
+                "description": "User title for Informatica Sign up"
+            }
+        },
+        "user_phone": {
+            "type": "string",
+            "metadata": {
+                "description": "User phone number for Informatica Sign up"
+            }
+        },
+        "org_name": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization for Informatica Sign up"
+            }
+        },
+        "org_address": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization Address for Informatica Sign up"
+            }
+        },
+        "org_city": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization city for Informatica Sign up"
+            }
+        },
+        "org_state": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization state for Informatica Sign up, Hint:Pass State Postal Codes Ex:CA"
+            }
+        },
+        "org_zipcode": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization zipcode for Informatica Sign up"
+            }
+            
+        },
+        "org_country": {
+            "type": "string",
+            "metadata": {
+                "description": "Organization's country for Informatica Sign up, Hint:Pass Country's ISO Codes Ex:US"
+            }
+        },
+        "org_employees": {
+            "type": "string",
+            "defaultValue": "5001_",
+            "allowedValues": [
+                "0_10",
+                "11_25",
+                "26_50",
+                "51_100",
+                "101_500",
+                "501_1000",
+                "1001_5000",
+                "5001_"
+            ],
+            "metadata": {
+                "description": "Organization's Employees for Informatica Sign up"
+            }
+            
+        },
+        "client_id": {
+            "type": "string",
+            "metadata": {
+                "description": "Client ID of User Ex:'xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV'"
+            }
         }
     },
     "variables": {
+        "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
-        "serviceLevelObjective": "DW100",
-        "startIpAddress": "0.0.0.0",
-        "endIpAddress": "255.255.255.255",
         "automationAccountName": "accountaccess",
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
         "tableName": "bi9",
-        "inputFolderPath": "adfgetstarted/inputdata",
-        "outputFolderPath": "adfgetstarted/partitioneddata",
         "vmName": "informatica",
         "storageAccountName": "infosa",
         "adfstorageAccountName": "adfsa",
@@ -126,6 +251,20 @@
         "networkInterfaceName": "[concat(variables('vmName'),'-nic')]",
         "networkSecurityGroupsName": "[concat(variables('vmName'),'-nsg')]",
         "subnet1Name": "subnet1",
+        "storageLinkedServiceName": "AzureStorageLinkedService",
+        "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
+        "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
+        "inforAutomationAccName": "infacc",
+        "automationAccName": "[concat(variables('inforAutomationAccName'),uniqueString(resourceGroup().id))]",
+        "credential1Name": "AzureRmCredentials",
+        "wfAutomationAccName": "infacc",
+        "wfaAtomationAccountName": "[concat(variables('wfAutomationAccName'),uniqueString(resourceGroup().id))]",
+        "serviceLevelObjective": "DW100",
+        "ip": "138.91.243.84:10011",
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255",
+        "inputFolderPath": "adfgetstarted/inputdata",
+        "outputFolderPath": "adfgetstarted/partitioneddata",
         "vnetAddressPrefix": "10.2.0.0/16",
         "subnet1Prefix": "10.2.0.0/24",
         "storageAccountType": "Standard_LRS",
@@ -139,45 +278,49 @@
         "storageApiVersion": "2015-06-15",
         "networkApiVersion": "2015-06-15",
         "computeApiVersion": "2015-06-15",
-        "publicIpAddressUrl": "[concat(parameters('armBaseUrl'),'/nested/public-ip.json')]",
-        "storageAccountUrl": "[concat(parameters('armBaseUrl'),'/nested/storage.json')]",
-        "virtualNetworkUrl": "[concat(parameters('armBaseUrl'),'/nested/vnet-subnet.json')]",
-        "networkInterfaceUrl": "[concat(parameters('armBaseUrl'),'/nested/network-interface.json')]",
-        "networkSecurityGroupUrl": "[concat(parameters('armBaseUrl'),'/nested/info-nsg.json')]",
-        "virtualMachineUrl": "[concat(parameters('armBaseUrl'),'/nested/virtual-machine-with-plan.json')]",
-        "virtualMachineExtUrl": "[concat(parameters('armBaseUrl'),'/nested/info-csa-extension.json')]",
-        "sqlDataWareHouseSetupURL": "[concat(parameters('armBaseUrl'),'/nested/sqldatawarehouse.json')]",
-        "createTableAutomationSetupURL": "[concat(parameters('armBaseUrl'),'/nested/createtableautomationjob.json')]",
-        "adfSetupURL": "[concat(parameters('armBaseUrl'),'/nested/azuredatafactory.json')]",
-        "fileUris": "[concat(parameters('armBaseUrl'),'/scripts/ICExtentionScript.ps1')]",
+        "sql-api-version": "2014-04-01",
+        "sqldb-api-version": "2015-05-01-preview",
+        "sqlfirewallrules-api-version": "2014-04-01",
+        "version": "3.2",
+        "sql-version": "12.0",
+        "fileUris": "[concat(variables('armBaseUrl'),'/scripts/ICExtentionScript.ps1')]",
         "apiVersion": "2015-10-01",
-        "storageLinkedServiceName": "AzureStorageLinkedService",
-        "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
-        "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
         "blobInputDataset": "AzureBlobInput",
         "blobOutputDataset": "AzureBlobOutput",
         "sqlDWOutputDataset": "AzureSqlDWOutput",
         "azureSqlDWLinkedServiceConnectionString": "[concat('Server=tcp:',variables('sqlDWServerName'),'.database.windows.net,1433;Database=', variables('sqlDWDBName'), ';Trusted_Connection=False;User ID=',parameters('sqlDWDBAdminName'),'@',variables('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connection Timeout=30;Encrypt=True')]",
         "clusterSize": 1,
-        "version": "3.2",
-        "sql-version": "12.0",
         "timeToLive": "00:45:00",
         "frequency": "Hour",
+        "armBaseUrl":"https://raw.githubusercontent.com/sysgain/informatica-p2p/master",
         "interval": 1,
         "writeBatchSize": 0,
         "writeBatchTimeout": "00:00:00",
         "timeout": "01:00:00",
         "automationjoblocation": "South Central US",
-        "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
-        "automationScriptUri": "[concat(parameters('armBaseUrl'),'/scripts/createTable.ps1')]",
+        "automationScriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
         "runbookDescription": "Create a Database Table in User provided Datawarehouse",
         "sku": "Basic",
         "sqldwlocation": "South Central US",
-        "sql-api-version": "2014-04-01",
-        "sqldb-api-version": "2015-05-01-preview",
-        "sqlfirewallrules-api-version": "2014-04-01",
         "collation": "SQL_Latin1_General_CP1_CI_AS",
-        "maxSizeBytes": "10995116277760"
+        "maxSizeBytes": "10995116277760",
+        "credSetupRunbookName": "inforunbook",
+        "wfrunbookName": "inforunbook1",
+        "wfrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-workflow.ps1')]",
+        "credsrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-signup.ps1')]",
+        "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
+        "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'/nested/public-ip.json')]",
+        "storageAccountUrl": "[concat(variables('armBaseUrl'),'/nested/storage.json')]",
+        "virtualNetworkUrl": "[concat(variables('armBaseUrl'),'/nested/vnet-subnet.json')]",
+        "networkInterfaceUrl": "[concat(variables('armBaseUrl'),'/nested/network-interface.json')]",
+        "networkSecurityGroupUrl": "[concat(variables('armBaseUrl'),'/nested/info-nsg.json')]",
+        "virtualMachineUrl": "[concat(variables('armBaseUrl'),'/nested/virtual-machine-with-plan.json')]",
+        "virtualMachineExtUrl": "[concat(variables('armBaseUrl'),'/nested/info-csa-extension.json')]",
+        "sqlDataWareHouseSetupURL": "[concat(variables('armBaseUrl'),'/nested/sqldatawarehouse.json')]",
+        "createTableAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/createtableautomationjob.json')]",
+        "adfSetupURL": "[concat(variables('armBaseUrl'),'/nested/azuredatafactory.json')]",
+        "workflowAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/workflow-automation.json')]",
+        "credentialsAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/info-signup-automation.json')]"
     },
     "resources": [
         {
@@ -185,7 +328,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('publicIpAddressUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -217,7 +360,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('storageAccountUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -249,7 +392,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('storageAccountUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -281,7 +424,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('virtualNetworkUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -324,7 +467,7 @@
                 "publicIpAddressDeploy"
             ],
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('networkInterfaceUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -362,7 +505,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('networkSecurityGroupUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -395,7 +538,7 @@
                 "networkInterfaceDeploy"
             ],
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('virtualMachineUrl')]",
                     "contentVersion": "1.0.0.0"
@@ -432,10 +575,10 @@
                         "value": "[variables('imageSKU')]"
                     },
                     "adminUsername": {
-                        "value": "[parameters('adminUsername')]"
+                        "value": "[parameters('adminUsername_informatica_vm')]"
                     },
                     "adminPassword": {
-                        "value": "[parameters('adminPassword')]"
+                        "value": "[parameters('adminPassword_informatica_vm')]"
                     },
                     "networkInterfaceName": {
                         "value": "[variables('networkInterfaceName')]"
@@ -450,14 +593,184 @@
             }
         },
         {
+            "name": "informaticaCredentialsAutomationSetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('credentialsAutomationSetupURL')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "jobId": {
+                        "value": "[parameters('jobId')]"
+                    },
+                    "automationAccountName": {
+                        "value": "[variables('automationAccName')]"
+                    },
+                    "credential1Name": {
+                        "value": "[variables('credential1Name')]"
+                    },
+                    "cred1Username": {
+                        "value": "[parameters('azure_Rm_Username')]"
+                    },
+                    "cred1Password": {
+                        "value": "[parameters('azure_Rm_Password')]"
+                    },
+                    "runbookName": {
+                        "value": "[variables('credSetupRunbookName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('automation_Location')]"
+                    },
+                    "runbookUrl": {
+                        "value": "[variables('credsrunbookUrl')]"
+                    },
+                    "sku": {
+                        "value": "[variables('sku')]"
+                    },
+                    "ip": {
+                        "value": "[variables('ip')]"
+                    },
+                    "sysgain_ms_email": {
+                        "value": "[parameters('sysgain_ms_email')]"
+                    },
+                    "sysgain_ms_password": {
+                        "value": "[parameters('sysgain_ms_password')]"
+                    },
+                    "user_email": {
+                        "value": "[parameters('user_email')]"
+                    },
+                    "informatica_user_name": {
+                        "value": "[parameters('informatica_user_name')]"
+                    },
+                    "informatica_user_password": {
+                        "value": "[parameters('informatica_user_password')]"
+                    },
+                    "user_firstname": {
+                        "value": "[parameters('user_firstname')]"
+                    },
+                    "user_lastname": {
+                        "value": "[parameters('user_lastname')]"
+                    },
+                    "user_title": {
+                        "value": "[parameters('user_title')]"
+                    },
+                    "user_phone": {
+                        "value": "[parameters('user_phone')]"
+                    },
+                    "org_name": {
+                        "value": "[parameters('org_name')]"
+                    },
+                    "org_address": {
+                        "value": "[parameters('org_address')]"
+                    },
+                    "org_city": {
+                        "value": "[parameters('org_city')]"
+                    },
+                    "org_state": {
+                        "value": "[parameters('org_state')]"
+                    },
+                    "org_zipcode": {
+                        "value": "[parameters('org_zipcode')]"
+                    },
+                    "org_country": {
+                        "value": "[parameters('org_country')]"
+                    },
+                    "org_employees": {
+                        "value": "[parameters('org_employees')]"
+                    },
+                    "client_id": {
+                        "value": "[parameters('client_id')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "workflowAutomationSetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "informaticaCredentialsAutomationSetup",
+                "virtualMachineExtDeploy",
+                "sqlDataWarehoueSetup",
+                "adfstorageAccountDeploy"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('workflowAutomationSetupURL')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "jobId": {
+                        "value": "[parameters('jobId')]"
+                    },
+                    "automationAccountName": {
+                        "value": "[variables('wfaAtomationAccountName')]"
+                    },
+                    "credentialName": {
+                        "value": "[variables('credential1Name')]"
+                    },
+                    "cred1Username": {
+                        "value": "[parameters('azure_Rm_Username')]"
+                    },
+                    "cred1Password": {
+                        "value": "[parameters('azure_Rm_Password')]"
+                    },
+                    "runbookName": {
+                        "value": "[variables('wfrunbookName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('automation_Location')]"
+                    },
+                    "runbookUrl": {
+                        "value": "[variables('wfrunbookUrl')]"
+                    },
+                    "sku": {
+                        "value": "[variables('sku')]"
+                    },
+                    "ip": {
+                        "value": "[variables('ip')]"
+                    },
+                    "sysgain_ms_email": {
+                        "value": "[parameters('sysgain_ms_email')]"
+                    },
+                    "sysgain_ms_password": {
+                        "value": "[parameters('sysgain_ms_password')]"
+                    },
+                    "informatica_user_name": {
+                        "value": "[parameters('informatica_user_name')]"
+                    },
+                    "informatica_user_password": {
+                        "value": "[parameters('informatica_user_password')]"
+                    },
+                    "informatica_csa_vmname": {
+                        "value": "[variables('vmName')]"
+                    },
+                    "client_id": {
+                        "value": "[parameters('client_id')]"
+                    },
+                    "adfStorageAccName": {
+                        "value": "[variables('adfstorageAccName')]"
+                    },
+                    "adfStorageAccKey": {
+                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.key1]"
+                    }
+                }
+            }
+        },
+        {
             "name": "virtualMachineExtDeploy",
             "dependsOn": [
-                "virtualMachineDeploy"
+                "virtualMachineDeploy",
+                "informaticaCredentialsAutomationSetup"
             ],
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "properties": {
-                "mode": "incremental",
+                "mode": "Incremental",
                 "templateLink": {
                     "uri": "[variables('virtualMachineExtUrl')]"
                 },
@@ -472,7 +785,7 @@
                         "value": "[variables('fileUris')]"
                     },
                     "arguments": {
-                        "value": "[parameters('arguments')]"
+                        "value": "[variables('arguments')]"
                     }
                 }
             }
@@ -575,16 +888,16 @@
                         "value": "[variables('automationjoblocation')]"
                     },
                     "baseURL": {
-                        "value": "https://susehpcnc.blob.core.windows.net/test/"
+                        "value": "[variables('baseURL')]"
                     },
                     "scriptUri": {
                         "value": "[variables('automationScriptUri')]"
                     },
                     "runbookDescription": {
-                        "value":"[variables('runbookDescription')]"
+                        "value": "[variables('runbookDescription')]"
                     },
                     "sku": {
-                        "value":"[variables('sku')]"
+                        "value": "[variables('sku')]"
                     }
                 }
             }
@@ -685,7 +998,7 @@
                         "value": "[variables('timeout')]"
                     },
                     "script": {
-                        "value": "[parameters('script')]"
+                        "value": "[parameters('hivescript')]"
                     }
                 }
             }
