@@ -40,7 +40,21 @@
             "type": "string",
             "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "Job Id of the automation Job, use https://www.guidgenerator.com to generate unique jobid"
+                "description": "Job Id of the create table automation Job, use https://www.guidgenerator.com to generate unique jobid"
+            }
+        },
+        "jobIdSignup": {
+            "type": "string",
+            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
+            "metadata": {
+                "description": "Job Id of the sign-up automation Job, use https://www.guidgenerator.com to generate unique jobid"
+            }
+        },
+        "jobIdWorkflow": {
+            "type": "string",
+            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
+            "metadata": {
+                "description": "Job Id of the workflow automation Job, use https://www.guidgenerator.com to generate unique jobid"
             }
         },
         "start": {
@@ -603,8 +617,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "jobId": {
-                        "value": "[parameters('jobId')]"
+                    "jobIdSignup": {
+                        "value": "[parameters('jobIdSignupd')]"
                     },
                     "automationAccountName": {
                         "value": "[variables('automationAccName')]"
@@ -704,8 +718,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "jobId": {
-                        "value": "[parameters('jobId')]"
+                    "jobIdWorkflow": {
+                        "value": "[parameters('jobIdWorkflow')]"
                     },
                     "automationAccountName": {
                         "value": "[variables('wfaAtomationAccountName')]"
