@@ -17,15 +17,12 @@
             "type": "string"
         },
         "credential1Name": {
-            "defaultValue": "Azure_RM_Account_Credentials",
             "type": "string"
         },
         "cred1Username": {
-            "defaultValue": "aocred@sysgain.com",
             "type": "string"
         },
         "cred1Password": {
-            "defaultValue": "aocred@sysgain.com",
             "type": "securestring"
         },
         "jobId": {
@@ -51,7 +48,7 @@
             }
         },
         "runbookUrl": {
-            "defaultValue": "---- ",
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master/runbooks/info-restapi-signup.ps1 ",
             "type": "string"
         },
         "tag": {
