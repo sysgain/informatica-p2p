@@ -169,7 +169,7 @@
         "timeout": "01:00:00",
         "automationjoblocation": "South Central US",
         "baseURL": "https://susehpcnc.blob.core.windows.net/test/",
-        "automationScriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
+        "automationScriptUri": "[concat(parameters('armBaseUrl'),'/scripts/createTable.ps1')]",
         "runbookDescription": "Create a Database Table in User provided Datawarehouse",
         "sku": "Basic",
         "sqldwlocation": "South Central US",
