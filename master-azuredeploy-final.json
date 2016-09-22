@@ -618,7 +618,7 @@
                 },
                 "parameters": {
                     "jobIdSignup": {
-                        "value": "[parameters('jobIdSignupd')]"
+                        "value": "[parameters('jobIdSignup')]"
                     },
                     "automationAccountName": {
                         "value": "[variables('automationAccName')]"
