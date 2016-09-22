@@ -25,7 +25,7 @@
         "cred1Password": {
             "type": "securestring"
         },
-        "jobId": {
+        "jobIdWorkflow": {
             "type": "string",
             "defaultValue": "24b18f62-aa2c-4528-ac10-1e3602eb4053",
             "metadata": {
@@ -182,7 +182,7 @@
                     }
                 },
                 {
-                    "name": "[concat(parameters('automationAccountName'), '/', parameters('jobId'))]",
+                    "name": "[concat(parameters('automationAccountName'), '/', parameters('jobIdWorkflow'))]",
                     "type": "Microsoft.Automation/automationAccounts/jobs",
                     "apiVersion": "2015-10-31",
                     "location": "[parameters('location')]",
