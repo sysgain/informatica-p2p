@@ -68,4 +68,9 @@
       }
     }
   ]
+  "outputs":{
+    "primaryKey":{
+        "value":"[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-06-15').primaryKey]"
+    }
+}
 }
