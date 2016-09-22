@@ -159,7 +159,7 @@
         "sqlDWOutputDataset": "AzureSqlDWOutput",
         "azureSqlDWLinkedServiceConnectionString": "[concat('Server=tcp:',variables('sqlDWServerName'),'.database.windows.net,1433;Database=', variables('sqlDWDBName'), ';Trusted_Connection=False;User ID=',parameters('sqlDWDBAdminName'),'@',variables('sqlDWServerName'),';Password=',parameters('sqlDWAdminPassword'),';Connection Timeout=30;Encrypt=True')]",
         "clusterSize": 1,
-        "version": "3.4",
+        "version": "3.2",
         "sql-version": "12.0",
         "timeToLive": "00:45:00",
         "frequency": "Hour",
