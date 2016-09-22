@@ -350,5 +350,11 @@
                 }
             ]
         }
-    ]
+    ],
+    "outputs": {
+    "ucpConsoleAddress": {
+      "value": "[parameters('script')]",
+      "type": "string"
+    }
+  }
 }
