@@ -13,6 +13,10 @@ workflow container1 {
         [string]
         $adfStorageAccKey
     )
+    Write-Output $credentialName,
+    Write-Output $adfStorageAccName,
+    Write-Output $adfStorageAccKey
+
     $Cred = Get-AutomationPSCredential -Name $credentialName
 
     Add-AzureRmAccount -Credential $Cred
