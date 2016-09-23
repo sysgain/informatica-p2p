@@ -105,7 +105,6 @@
                 "description": "Azure RM Password"
             }
         },
-        
         "user_email": {
             "type": "string",
             "metadata": {
@@ -205,7 +204,6 @@
             "metadata": {
                 "description": "Organization zipcode for Informatica Sign up"
             }
-            
         },
         "org_country": {
             "type": "string",
@@ -230,14 +228,13 @@
             "metadata": {
                 "description": "Organization's Employees for Informatica Sign up"
             }
-            
         }
     },
     "variables": {
-        "client_id":"xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
-        "hivescript":"",
-        "sysgain_ms_email":"[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
-        "sysgain_ms_password":"[uniqueString(resourceGroup().id)]",
+        "client_id": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
+        "hivescript": "",
+        "sysgain_ms_email": "[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
+        "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
@@ -301,7 +298,7 @@
         "clusterSize": 1,
         "timeToLive": "00:45:00",
         "frequency": "Hour",
-        "armBaseUrl":"https://raw.githubusercontent.com/sysgain/informatica-p2p/master",
+        "armBaseUrl": "https://raw.githubusercontent.com/sysgain/informatica-p2p/master",
         "interval": 1,
         "writeBatchSize": 0,
         "writeBatchTimeout": "00:00:00",
