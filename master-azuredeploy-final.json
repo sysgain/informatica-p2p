@@ -38,23 +38,20 @@
         },
         "jobId": {
             "type": "string",
-            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "Job Id of the create table automation Job, use https://www.guidgenerator.com to generate unique jobid"
+                "description": "Job Id of the create table automation Job, use https://www.guidgenerator.com to generate unique jobid Ex:5f32ff4e-a5c5-47af-8b70-981c896a9163"
             }
         },
         "jobIdSignup": {
             "type": "string",
-            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "Job Id of the sign-up automation Job, use https://www.guidgenerator.com to generate unique jobid"
+                "description": "Job Id of the sign-up automation Job, use https://www.guidgenerator.com to generate unique jobid Ex:5f32ff4e-a5c5-47af-8b70-981c896a9163"
             }
         },
         "jobIdWorkflow": {
             "type": "string",
-            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
-                "description": "Job Id of the workflow automation Job, use https://www.guidgenerator.com to generate unique jobid"
+                "description": "Job Id of the workflow automation Job, use https://www.guidgenerator.com to generate unique jobid Ex:5f32ff4e-a5c5-47af-8b70-981c896a9163"
             }
         },
         "start": {
@@ -241,7 +238,7 @@
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
-        "automationAccountName": "accountaccess",
+        "automationAccountName": "createtbl",
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
@@ -262,10 +259,10 @@
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
         "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
-        "inforAutomationAccName": "infacc",
+        "inforAutomationAccName": "infoaccess",
         "automationAccName": "[concat(variables('inforAutomationAccName'),uniqueString(resourceGroup().id))]",
         "credential1Name": "AzureRmCredentials",
-        "wfAutomationAccName": "infacc",
+        "wfAutomationAccName": "infoaccess",
         "wfaAtomationAccountName": "[concat(variables('wfAutomationAccName'),uniqueString(resourceGroup().id))]",
         "serviceLevelObjective": "DW100",
         "ip": "138.91.243.84:10011",
@@ -311,8 +308,8 @@
         "sqldwlocation": "South Central US",
         "collation": "SQL_Latin1_General_CP1_CI_AS",
         "maxSizeBytes": "10995116277760",
-        "credSetupRunbookName": "inforunbook",
-        "wfrunbookName": "inforunbook1",
+        "credSetupRunbookName": "inforunbook1",
+        "wfrunbookName": "inforunbook2",
         "wfrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-workflow.ps1')]",
         "credsrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-signup.ps1')]",
         "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'/nested/public-ip.json')]",
