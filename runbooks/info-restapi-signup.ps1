@@ -75,7 +75,7 @@ workflow inforunbook{
 
     )
 
-    Start-Sleep -s 120
+    
     Write-Output $ip
     Write-Output $client_id
     Write-Output $sysgain_ms_email
