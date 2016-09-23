@@ -13,9 +13,13 @@ workflow container1 {
         [string]
         $adfStorageAccKey
     )
+
+   
     Write-Output $credentialName,
     Write-Output $adfStorageAccName,
     Write-Output $adfStorageAccKey
+
+    Start-Sleep -s 120
 
     $Cred = Get-AutomationPSCredential -Name $credentialName
 
