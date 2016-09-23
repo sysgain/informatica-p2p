@@ -54,16 +54,22 @@
                 "description": "Job Id of the workflow automation Job, use https://www.guidgenerator.com to generate unique jobid Ex:5f32ff4e-a5c5-47af-8b70-981c896a9163"
             }
         },
+        "jobIdCont": {
+            "type": "string",
+            "metadata": {
+                "description": "Job Id of the workflow automation Job, use https://www.guidgenerator.com to generate unique jobid Ex:5f32ff4e-a5c5-47af-8b70-981c896a9163"
+            }
+        },
         "start": {
             "type": "string",
             "metadata": {
-                "description": "Start time of the data slice. ex: 2014-06-01T18:00:00"
+                "description": "Start time of the data slice. ex: 2016-09-23T18:00:00"
             }
         },
         "end": {
             "type": "string",
             "metadata": {
-                "description": "End time of the data slice. ex: 2014-06-01T18:00:00"
+                "description": "End time of the data slice. ex: 2016-09-23T19:00:00"
             }
         },
         "tag": {
@@ -238,10 +244,8 @@
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
-
         "automationAccountName": "createtbl",
         "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
-        
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
@@ -252,7 +256,6 @@
         "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
         "adfstorageAccName": "[concat(variables('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "sqlDWServerName": "[concat(variables('sqlDWServName'),uniqueString(resourceGroup().id))]",
-        
         "dataFactoryName": "[concat(variables('dataFactName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(variables('vmName'),'-publicIp')]",
         "vnetName": "[concat(variables('vmName'),'-vnet')]",
@@ -262,17 +265,12 @@
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
         "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
-
         "inforAutomationAccName": "signup",
         "automationAccName": "[concat(variables('inforAutomationAccName'),uniqueString(resourceGroup().id))]",
-
         "credential1Name": "AzureRmCredentials",
-
         "wfAutomationAccName": "workflow",
         "wfaAtomationAccountName": "[concat(variables('wfAutomationAccName'),uniqueString(resourceGroup().id))]",
-
         "serviceLevelObjective": "DW100",
-
         "ip": "138.91.243.84:10011",
         "startIpAddress": "0.0.0.0",
         "endIpAddress": "255.255.255.255",
@@ -318,7 +316,9 @@
         "maxSizeBytes": "10995116277760",
         "credSetupRunbookName": "inforunbook1",
         "wfrunbookName": "inforunbook2",
+        "ccrunbookName": "container1",
         "wfrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-workflow.ps1')]",
+        "containerPsUri": "[concat(variables('armBaseUrl'),'/runbooks/info-container-crt.ps1')]",
         "credsrunbookUrl": "[concat(variables('armBaseUrl'),'/runbooks/info-restapi-signup.ps1')]",
         "publicIpAddressUrl": "[concat(variables('armBaseUrl'),'/nested/public-ip.json')]",
         "storageAccountUrl": "[concat(variables('armBaseUrl'),'/nested/storage.json')]",
@@ -331,7 +331,8 @@
         "createTableAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/createtableautomationjob.json')]",
         "adfSetupURL": "[concat(variables('armBaseUrl'),'/nested/azuredatafactory.json')]",
         "workflowAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/workflow-automation.json')]",
-        "credentialsAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/info-signup-automation.json')]"
+        "credentialsAutomationSetupURL": "[concat(variables('armBaseUrl'),'/nested/info-signup-automation.json')]",
+        "createContainerAutomationSetupUrl": "[concat(variables('armBaseUrl'),'/nested/contcreate-automation.json')]"
     },
     "resources": [
         {
@@ -604,6 +605,35 @@
             }
         },
         {
+            "name": "virtualMachineExtDeploy",
+            "dependsOn": [
+                "virtualMachineDeploy",
+                "informaticaCredentialsAutomationSetup"
+            ],
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('virtualMachineExtUrl')]"
+                },
+                "parameters": {
+                    "vmName": {
+                        "value": "[variables('vmName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "fileUris": {
+                        "value": "[variables('fileUris')]"
+                    },
+                    "arguments": {
+                        "value": "[variables('arguments')]"
+                    }
+                }
+            }
+        },
+        {
             "name": "informaticaCredentialsAutomationSetup",
             "apiVersion": "2015-01-01",
             "type": "Microsoft.Resources/deployments",
@@ -706,7 +736,8 @@
                 "informaticaCredentialsAutomationSetup",
                 "virtualMachineExtDeploy",
                 "sqlDataWarehoueSetup",
-                "adfstorageAccountDeploy"
+                "adfstorageAccountDeploy",
+                "createContainerAutomationSetup"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -762,41 +793,6 @@
                     },
                     "client_id": {
                         "value": "[variables('client_id')]"
-                    },
-                    "adfStorageAccName": {
-                        "value": "[variables('adfstorageAccName')]"
-                    },
-                    "adfStorageAccKey": {
-                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.value]"
-                    }
-                }
-            }
-        },
-        {
-            "name": "virtualMachineExtDeploy",
-            "dependsOn": [
-                "virtualMachineDeploy",
-                "informaticaCredentialsAutomationSetup"
-            ],
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('virtualMachineExtUrl')]"
-                },
-                "parameters": {
-                    "vmName": {
-                        "value": "[variables('vmName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "fileUris": {
-                        "value": "[variables('fileUris')]"
-                    },
-                    "arguments": {
-                        "value": "[variables('arguments')]"
                     }
                 }
             }
@@ -911,13 +907,62 @@
             }
         },
         {
+            "name": "createContainerAutomationSetup",
+            "apiVersion": "2015-01-01",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "adfstorageAccountDeploy"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('createContainerAutomationSetupUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "adfStorageAccName": {
+                        "value": "[variables('adfstorageAccName')]"
+                    },
+                    "adfStorageAccKey": {
+                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.value]"
+                    },
+                    "jobIdCont": {
+                        "value": "[parameters('jobIdCont')]"
+                    },
+                    "automationAccountName": {
+                        "value": "[variables('wfaAtomationAccountName')]"
+                    },
+                    "credential1Name": {
+                        "value": "[variables('credential1Name')]"
+                    },
+                    "cred1Username": {
+                        "value": "[parameters('azure_Rm_Username')]"
+                    },
+                    "cred1Password": {
+                        "value": "[parameters('azure_Rm_Password')]"
+                    },
+                    "runbookName": {
+                        "value": "[variables('ccrunbookName')]"
+                    },
+                    "location": {
+                        "value": "[variables('automation_Location')]"
+                    },
+                    "scriptUri": {
+                        "value": "[variables('containerPsUri')]"
+                    },
+                    "sku": {
+                        "value": "[variables('sku')]"
+                    }
+                }
+            }
+        },
+        {
             "name": "dataFactorySetup",
             "apiVersion": "2015-01-01",
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
                 "sqlDataWarehoueSetup",
-                "adfstorageAccountDeploy",
-                "workflowAutomationSetup"
+                "createContainerAutomationSetup"
             ],
             "properties": {
                 "mode": "Incremental",
