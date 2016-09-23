@@ -42,7 +42,7 @@ workflow inforunbook1{
         $user_title,
 
         [Parameter(Mandatory=$true)]
-        [string]
+        [long]
         $user_phone,
 
         [Parameter(Mandatory=$true)]
