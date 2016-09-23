@@ -238,7 +238,10 @@
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
+
         "automationAccountName": "createtbl",
+        "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
+        
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
@@ -249,7 +252,7 @@
         "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
         "adfstorageAccName": "[concat(variables('adfstorageAccountName'),uniqueString(resourceGroup().id))]",
         "sqlDWServerName": "[concat(variables('sqlDWServName'),uniqueString(resourceGroup().id))]",
-        "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
+        
         "dataFactoryName": "[concat(variables('dataFactName'),uniqueString(resourceGroup().id))]",
         "pubicIPAddressName": "[concat(variables('vmName'),'-publicIp')]",
         "vnetName": "[concat(variables('vmName'),'-vnet')]",
@@ -259,12 +262,17 @@
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
         "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
-        "inforAutomationAccName": "infoaccess",
+
+        "inforAutomationAccName": "signup",
         "automationAccName": "[concat(variables('inforAutomationAccName'),uniqueString(resourceGroup().id))]",
+
         "credential1Name": "AzureRmCredentials",
-        "wfAutomationAccName": "infoaccess",
+
+        "wfAutomationAccName": "workflow",
         "wfaAtomationAccountName": "[concat(variables('wfAutomationAccName'),uniqueString(resourceGroup().id))]",
+
         "serviceLevelObjective": "DW100",
+
         "ip": "138.91.243.84:10011",
         "startIpAddress": "0.0.0.0",
         "endIpAddress": "255.255.255.255",
