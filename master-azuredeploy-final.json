@@ -312,7 +312,7 @@
         "writeBatchTimeout": "00:00:00",
         "timeout": "01:00:00",
         "automationjoblocation": "South Central US",
-        "automationScriptUri": "[concat(variables('baseURL'),'createTable.ps1')]",
+        "automationScriptUri": "[concat(variables('armBaseUrl'),'/scripts/createTable.ps1')]",
         "runbookDescription": "Create a Database Table in User provided Datawarehouse",
         "sku": "Basic",
         "sqldwlocation": "South Central US",
