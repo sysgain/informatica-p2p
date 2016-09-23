@@ -233,7 +233,7 @@
     },
     "variables": {
         "client_id": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
-        "publicIPdns":"[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
+        "publicIPdns": "[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
         "hivescript": "",
         "sysgain_ms_email": "[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
@@ -911,8 +911,8 @@
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
                 "sqlDataWarehoueSetup",
-                "adfstorageAccountDeploy"
-
+                "adfstorageAccountDeploy",
+                "workflowAutomationSetup"
             ],
             "properties": {
                 "mode": "Incremental",
