@@ -60,10 +60,6 @@
             "type": "string",
             "defaultValue": "South Central US"
         },
-        "baseURL": {
-            "type": "string",
-            "defaultValue": "https://susehpcnc.blob.core.windows.net/test/"
-        },
         "scriptUri": {
             "type": "string",
             "defaultValue": "[concat(variables('baseURL'),'createTable.ps1')]"
