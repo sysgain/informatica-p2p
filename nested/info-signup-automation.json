@@ -130,10 +130,6 @@
             "type": "string"
         }
     },
-    "variables": {
-        "variable1Name": "varaible1",
-        "variable2Name": "variable2"
-    },
     "resources": [
         {
             "name": "[parameters('automationAccountName')]",
@@ -188,38 +184,6 @@
                     }
                 },
                 {
-                    "name": "[concat(parameters('automationAccountName'), '/', variables('variable1Name'))]",
-                    "type": "Microsoft.Automation/automationAccounts/variables",
-                    "apiVersion": "2015-10-31",
-                    "dependsOn": [
-                        "[concat('Microsoft.Automation/automationAccounts/', parameters('automationAccountName'))]"
-                    ],
-                    "properties": {
-                        "variable": {
-                            "name": "[variables('variable1Name')]",
-                            "type": "string",
-                            "value": "",
-                            "Encrypted": false
-                        }
-                    }
-                },
-                {
-                    "name": "[concat(parameters('automationAccountName'), '/', variables('variable2Name'))]",
-                    "type": "Microsoft.Automation/automationAccounts/variables",
-                    "apiVersion": "2015-10-31",
-                    "dependsOn": [
-                        "[concat('Microsoft.Automation/automationAccounts/', parameters('automationAccountName'))]"
-                    ],
-                    "properties": {
-                        "variable": {
-                            "name": "[variables('variable2Name')]",
-                            "type": "string",
-                            "value": "",
-                            "Encrypted": false
-                        }
-                    }
-                },
-                {
                     "name": "[concat(parameters('automationAccountName'), '/', parameters('jobIdSignup'))]",
                     "type": "Microsoft.Automation/automationAccounts/jobs",
                     "apiVersion": "2015-10-31",
@@ -255,9 +219,7 @@
                     "dependsOn": [
                         "[concat('Microsoft.Automation/automationAccounts/', parameters('automationAccountName'))]",
                         "[resourceId('Microsoft.Automation/automationAccounts/runbooks', parameters('automationAccountName'), parameters('runbookName'))]",
-                        "[resourceId('Microsoft.Automation/automationAccounts/credentials', parameters('automationAccountName'), parameters('credential1Name'))]",
-                        "[resourceId('Microsoft.Automation/automationAccounts/variables', parameters('automationAccountName'), variables('variable1Name'))]",
-                        "[resourceId('Microsoft.Automation/automationAccounts/variables', parameters('automationAccountName'), variables('variable2Name'))]"
+                        "[resourceId('Microsoft.Automation/automationAccounts/credentials', parameters('automationAccountName'), parameters('credential1Name'))]"
                     ]
                 }
             ]
