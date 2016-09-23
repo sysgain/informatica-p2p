@@ -88,6 +88,7 @@
             }
         },
         "publicIPdnsPrefix": {
+            "defaultValue": "infodns",
             "type": "string",
             "metadata": {
                 "description": " Public IP dns prefix"
@@ -232,6 +233,7 @@
     },
     "variables": {
         "client_id": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
+        "publicIPdns":"[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
         "hivescript": "",
         "sysgain_ms_email": "[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
@@ -239,7 +241,7 @@
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
-        "automationAccountName": "createTbl",
+        "automationAccountName": "accountaccess",
         "credentialName": "aocred",
         "runbookName": "createtable",
         "dataFactName": "adf",
@@ -260,7 +262,7 @@
         "storageLinkedServiceName": "AzureStorageLinkedService",
         "hdInsightOnDemandLinkedServiceName": "HDInsightOnDemandLinkedService",
         "azureSqlDWLinkedServiceName": "AzureSqlDWLinkedService",
-        "inforAutomationAccName": "info",
+        "inforAutomationAccName": "infacc",
         "automationAccName": "[concat(variables('inforAutomationAccName'),uniqueString(resourceGroup().id))]",
         "credential1Name": "AzureRmCredentials",
         "wfAutomationAccName": "infacc",
@@ -348,7 +350,7 @@
                         "value": "[variables('pubicIPAddressName')]"
                     },
                     "publicIPdnsPrefix": {
-                        "value": "[parameters('publicIPdnsPrefix')]"
+                        "value": "[variables('publicIPdns')]"
                     },
                     "tag": {
                         "value": {
@@ -908,7 +910,9 @@
             "apiVersion": "2015-01-01",
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
-                "sqlDataWarehoueSetup"
+                "sqlDataWarehoueSetup",
+                "adfstorageAccountDeploy"
+
             ],
             "properties": {
                 "mode": "Incremental",
