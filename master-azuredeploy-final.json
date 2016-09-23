@@ -150,9 +150,9 @@
         },
         "user_phone": {
             "type": "string",
-            "defaultValue": "(800) 888-8888",
+            "defaultValue": "1234567890",
             "metadata": {
-                "description": "User phone number for Informatica Sign up Enter a valid phone number. For example, (800) 888-8888 or +44 (0)1234 567 890."
+                "description": "User phone number for Informatica Sign up. Only numbers Ex: 1234567890"
             }
         },
         "org_name": {
