@@ -40,10 +40,9 @@ param(
         [string]
         $adfStorageAccKey
 )
-    Start-Sleep -s 120
+  
     Write-Output $ip
     Write-Output $client_id
-    Write-Output $credentialName
     Write-Output $sysgain_ms_email
     Write-Output $sysgain_ms_password
     Write-Output $informatica_user_name
@@ -117,20 +116,6 @@ param(
     Write-Output "The server url is "$serverUrl
     Write-Output "------------------------------------------------------"
     Write-Output "The auth token is "$authToken
-
-
-
- 
-
-
-
-    $Cred = Get-AutomationPSCredential -Name $credentialName
-
-    Add-AzureRmAccount -Credential $Cred
-    Login-AzureRmAccount -Credential $Cred
-    $storageCtx = New-AzureStorageContext -StorageAccountName $adfStorageAccName -StorageAccountKey $adfStorageAccKey
-	
-    New-AzureStorageContainer -Name "adfgetstarted" -Context $storageCtx
 
 
 
