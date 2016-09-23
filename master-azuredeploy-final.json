@@ -793,6 +793,12 @@
                     },
                     "client_id": {
                         "value": "[variables('client_id')]"
+                    },
+                    "adfStorageAccName": {
+                        "value": "[variables('adfstorageAccName')]"
+                    },
+                    "adfStorageAccKey": {
+                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.value]"
                     }
                 }
             }
