@@ -1,4 +1,4 @@
-workflow inforunbook1 {
+workflow inforunbook2{
 param(
         [Parameter(Mandatory=$true)]
         [string]
