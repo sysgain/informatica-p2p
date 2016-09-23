@@ -1,4 +1,4 @@
-    
+workflow inforunbook{    
     param(
         
         [Parameter(Mandatory=$true)]
@@ -98,8 +98,9 @@
 
 
 
-
-    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+    InlineScript{
+        [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+    }
 
     Write-Output "------------------------------------------------------------------"       
     Write-Output "Signing up into Sysgain..."
@@ -205,4 +206,4 @@
     Write-Output "Signed up successfully!"
 
    
-#}
+}

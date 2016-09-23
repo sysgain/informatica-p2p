@@ -1,3 +1,4 @@
+workflow inforunbook1 {
 param(
         [Parameter(Mandatory=$true)]
         [string]
@@ -52,9 +53,9 @@ param(
     Write-Output $adfStorageAccKey
     Write-Output "------------------------------------------------------"
 
-
-    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
-
+    InlineScript{
+        [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+    }
 
     Write-Output "Logging into Sysgain..."
     Write-Output "------------------------------------------------------"
@@ -157,6 +158,9 @@ param(
     $workres = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json'
 
     Write-Output $workres | ConvertTo-Json
+
+
+}
 
 
 
