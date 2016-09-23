@@ -130,12 +130,14 @@
             "type": "string",
             "defaultValue": "01:00:00"
         },
-         "script": {
-         "type": "string",
-         "defaultValue": ""
-    }
+        "script": {
+            "type": "string",
+            "defaultValue": ""
+        }
     },
-    "variables": {"storageApiVersion": "2015-06-15" },
+    "variables": {
+        "storageApiVersion": "2015-06-15"
+    },
     "resources": [
         {
             "name": "[parameters('dataFactoryName')]",
@@ -352,9 +354,9 @@
         }
     ],
     "outputs": {
-    "ucpConsoleAddress": {
-      "value": "[parameters('script')]",
-      "type": "string"
+        "ucpConsoleAddress": {
+            "value": "[parameters('script')]",
+            "type": "string"
+        }
     }
-  }
 }
