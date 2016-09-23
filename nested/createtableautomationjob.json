@@ -4,7 +4,6 @@
     "parameters": {
         "jobId": {
             "type": "string",
-            "defaultValue": "5f32ff4e-a5c5-47af-8b70-981c896a9163",
             "metadata": {
                 "description": "Unique GUID"
             }
@@ -61,8 +60,7 @@
             "defaultValue": "South Central US"
         },
         "scriptUri": {
-            "type": "string",
-            "defaultValue": "[concat(variables('baseURL'),'createTable.ps1')]"
+            "type": "string"
         },
         "runbookDescription": {
             "type": "string",
