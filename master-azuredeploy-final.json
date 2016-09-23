@@ -93,13 +93,6 @@
                 "description": " Public IP dns prefix"
             }
         },
-        "hivescript": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Hive query inline script"
-            }
-        },
         "azure_Rm_Username": {
             "type": "string",
             "metadata": {
@@ -242,6 +235,7 @@
     },
     "variables": {
         "client_id":"xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
+        "hivescript":"",
         "sysgain_ms_email":"[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
         "sysgain_ms_password":"[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
@@ -1008,7 +1002,7 @@
                         "value": "[variables('timeout')]"
                     },
                     "script": {
-                        "value": "[parameters('hivescript')]"
+                        "value": "[variables('hivescript')]"
                     }
                 }
             }
