@@ -38,9 +38,23 @@ param(
         [Parameter(Mandatory=$true)]
         [string]
         $adfStorageAccKey
-
 )
+    Start-Sleep -s 120
+    Write-Output $ip
+    Write-Output $client_id
+    Write-Output $credentialName
+    Write-Output $sysgain_ms_email
+    Write-Output $sysgain_ms_password
+    Write-Output $informatica_user_name
+    Write-Output $informatica_user_password
+    Write-Output $informatica_csa_vmname
+    Write-Output $adfStorageAccName
+    Write-Output $adfStorageAccKey
+    Write-Output "------------------------------------------------------"
+
+
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+
 
     Write-Output "Logging into Sysgain..."
     Write-Output "------------------------------------------------------"
@@ -65,6 +79,8 @@ param(
 
     $auth0 = Invoke-RestMethod -Uri $msLoginUrl -Method Post -Headers $headLogin -Body $bodyJsonLogin -ContentType 'application/json'
 
+    Write-Output $auth0 | ConvertTo-Json
+
     Write-Output "Logging into informatica..."
     Write-Output "------------------------------------------------------"
 
@@ -85,6 +101,7 @@ param(
     $infobodyJsonLogin = $infobodyLogin | ConvertTo-Json
 
     $responseLogin = Invoke-RestMethod -Uri $infoLoginUrl -Method Post -Headers $infoheadLogin -Body $infobodyJsonLogin -ContentType 'application/json'
+    Write-Output $responseLogin | ConvertTo-Json
 
     $icSessionId = $responseLogin.infoData.icSessionId
     $serverUrl = $responseLogin.infoData.serverUrl

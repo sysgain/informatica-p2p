@@ -1,4 +1,4 @@
-    #Start-Sleep -s 120
+    
     param(
         
         [Parameter(Mandatory=$true)]
@@ -75,10 +75,33 @@
 
     )
 
+    Start-Sleep -s 120
+    Write-Output $ip
+    Write-Output $client_id
+    Write-Output $sysgain_ms_email
+    Write-Output $sysgain_ms_password
+    Write-Output $informatica_user_name
+    Write-Output $informatica_user_password
+    Write-Output $user_email
+    Write-Output $user_firstName
+    Write-Output $user_lastName
+    Write-Output $user_title  
+    Write-Output $user_phone
+    Write-Output $org_name
+    Write-Output $org_address
+    Write-Output $org_city
+    Write-Output $org_state
+    Write-Output $org_zipcode
+    Write-Output $org_country
+    Write-Output $org_employees
+    Write-Output "------------------------------------------------------------------"
+
+
+
 
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 
-            
+    Write-Output "------------------------------------------------------------------"       
     Write-Output "Signing up into Sysgain..."
     Write-Output "------------------------------------------------------------------"
   
@@ -99,8 +122,8 @@
     $bodyJsonSignUp = $bodySignUp | ConvertTo-Json
 
     $res = Invoke-RestMethod -Uri $msSignUpUrl -Method Post -Headers $headSignUp -Body $bodyJsonSignUp -ContentType 'application/json'
-
-    #Write-Output $res | ConvertTo-Json
+    
+    Write-Output $res | ConvertTo-Json
     Write-Output "Signed up successfully!"
 
 
@@ -132,7 +155,7 @@
 
     $auth0 = Invoke-RestMethod -Uri $msLoginUrl -Method Post -Headers $headLogin -Body $bodyJsonLogin -ContentType 'application/json'
 
-    #Write-Output $auth0 | ConvertTo-Json
+    Write-Output $auth0 | ConvertTo-Json
     Write-Output "Logged in successfully!"
 
 
@@ -178,6 +201,8 @@
     }'
 
     $response = Invoke-RestMethod -Uri $infoSignUpUrl -Method Post -Headers $infoheadSignUp -Body $infobodySignUp -ContentType 'application/json'
+    Write-Output $response | ConvertTo-Json
     Write-Output "Signed up successfully!"
+
    
 #}
