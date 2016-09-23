@@ -202,8 +202,7 @@
                             "client_id": "[parameters('client_id')]",
                             "informatica_csa_vmname": "[parameters('informatica_csa_vmname')]",
                             "adfStorageAccName": "[parameters('adfstorageAccName')]",
-                            "adfStorageAccKey": "[parameters('adfStorageAccKey')]",
-                            "credentialName": "[parameters('credential1Name')]"
+                            "adfStorageAccKey": "[parameters('adfStorageAccKey')]"
                         }
                     },
                     "dependsOn": [
