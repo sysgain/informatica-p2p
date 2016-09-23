@@ -233,8 +233,8 @@
                         },
                         "parameters": {
                             "ip": "[parameters('ip')]",
-                            "signup_sysgain_username": "[parameters('sysgain_ms_email')]",
-                            "signup_sysgain_password": "[parameters('sysgain_ms_password')]",
+                            "sysgain_ms_email": "[parameters('sysgain_ms_email')]",
+                            "sysgain_ms_password": "[parameters('sysgain_ms_password')]",
                             "user_name": "[parameters('informatica_user_name')]",
                             "user_email": "[parameters('user_email')]",
                             "user_password": "[parameters('informatica_user_password')]",
