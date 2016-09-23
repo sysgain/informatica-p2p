@@ -754,7 +754,7 @@
                         "value": "[variables('vmName')]"
                     },
                     "client_id": {
-                        "value": "variables('client_id')]"
+                        "value": "[variables('client_id')]"
                     },
                     "adfStorageAccName": {
                         "value": "[variables('adfstorageAccName')]"
