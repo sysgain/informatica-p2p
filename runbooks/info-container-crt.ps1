@@ -14,19 +14,25 @@ workflow container1 {
         $adfStorageAccKey
     )
 
-   
+    InlineScript{
+
+    $credentialName= $Using:credentialName  
+    $adfStorageAccName = $Using:adfStorageAccName
+	$adfStorageAccKey = $Using:adfStorageAccKey
     Write-Output $credentialName,
     Write-Output $adfStorageAccName,
     Write-Output $adfStorageAccKey
 
-    Start-Sleep -s 120
+    Start-Sleep -s 60
 
     $Cred = Get-AutomationPSCredential -Name $credentialName
 
     Add-AzureRmAccount -Credential $Cred
-    Login-AzureRmAccount -Credential $Cred
+    
     $storageCtx = New-AzureStorageContext -StorageAccountName $adfStorageAccName -StorageAccountKey $adfStorageAccKey
 	
     New-AzureStorageContainer -Name "adfgetstarted" -Context $storageCtx
+
+    }
     
 }
