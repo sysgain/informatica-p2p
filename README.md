@@ -64,13 +64,13 @@ The deployment takes about 30-45 mins.
 ##Usage
 #### Connect
 After deploying the solution template we can verify the following 
-•	We can verify the Informatica Signup process deployment by logging into the Informatica Cloud portal by using the credentials provided during the deployment for Informatica user name and password.
+We can verify the Informatica Signup process deployment by logging into the Informatica Cloud portal by using the credentials provided during the deployment for Informatica user name and password.
 Please find URL for the Informatica cloud:
 https://app.informaticaondemand.com/ma/
 
 We should be able to login successfully
 
-•	We can verify the  Informatica cloud Security Agent  up-to-date status(upgraded to latest version)  by logging  two ways 
+We can verify the  Informatica cloud Security Agent  up-to-date status(upgraded to latest version)  by logging  two ways 
 	By logging into the VM 
 	We can verify from the Informatica Cloud portal
 url: https://app.informaticaondemand.com/ma/  (use same Informatica credentials used during the deployment,   Informatica user name and password )
