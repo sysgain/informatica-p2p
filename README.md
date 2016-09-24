@@ -48,7 +48,7 @@ We are going to create an environment from which demos the Informatica Cloud use
 The diagram above provides the overall deployment architecture for this solution template.
 As a part of deployment, the template launches and integrates the following:
 
-1. Informatica Cloud Secure Agent Virtual machine[CSA] (Standard_A2) from Azure marketplace image, Public IP, Storage Account (Standard_LRS), Virtual Network, Network Interface and Network Security Group.
+1. Informatica Cloud Secure Agent (Standard_A2) from Azure marketplace image, Public IP, Storage Account (Standard_LRS), Virtual Network, Network Interface and Network Security Group.
 2. Virtual network, Public IP and Network security group(NSG) are assigned to Network Interface (NIC) which is attached to Informatica CSA VM.
 3. Deploys a custom script extension on Informatica CSA VM which connects Informatica Cloud Security Agent to Informatica Cloud.
 4. Deploys SQL Data Warehouse with 100DWUs performance tier with collation “SQL_Latin1_General_CP1_CI_AS” and maximum size of 10 Terabytes.
