@@ -68,7 +68,7 @@ After deploying the solution template we can verify the following
 Please find URL for the Informatica cloud:
 https://app.informaticaondemand.com/ma/
 
-We should be able to login successfully.
+We should be able to login successfully
 
 •	We can verify the  Informatica cloud Security Agent  up-to-date status(upgraded to latest version)  by logging  two ways 
 	By logging into the VM 
@@ -82,16 +82,20 @@ We can connect to the VM using RDP/Remote Desktop Connection. Once we are inside
 1.	From command prompt, navigate to the secure agent installation directory 
 
 cd  C:\Program Files (x86)\Informatica Cloud Secure Agent\main\agentcore
- 
- 
+  
 2.	You can check the registration status of a Secure Agent using the following   
- command in the same directory:
-##### From the Informatica Cloud portal
-After login into the Informatica Cloud Navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status we can see Up-to-date as shown below.
+
+command in the same directory:
 consoleAgentManager.bat isConfigured
-The above command should return “true”
+
+##### From the Informatica Cloud portal
+
+After login into the Informatica Cloud Navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status we can see Up-to-date as shown below.
+
 ![[](images/ic1.png)](images/ic1.png)
+
 ![[](images/ic2.png)](images/ic2.png)
+
 ##Support
 For any support-related issues or questions, please contact azuremarketplace@sysgain.com for assistance.
 
