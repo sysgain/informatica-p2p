@@ -218,7 +218,7 @@
                         "type": "AzureBlob",
                         "linkedServiceName": "[parameters('storageLinkedServiceName')]",
                         "typeProperties": {
-                            "fileName": "MachineDataProductAccount092302.csv",
+                            "fileName": "MachineDataProductAccount092302",
                             "folderPath": "[parameters('inputFolderPath')]",
                             "format": {
                                 "type": "TextFormat",
