@@ -57,11 +57,11 @@
         },
         "inputFolderPath": {
             "type": "string",
-            "defaultValue": "adfgetstarted/inputdata"
+            "defaultValue": "adfgetstarted"
         },
         "outputFolderPath": {
             "type": "string",
-            "defaultValue": "adfgetstarted/inputdata"
+            "defaultValue": ""
         },
         "adfstorageAccountName": {
             "type": "string"
@@ -155,7 +155,7 @@
                     "properties": {
                         "type": "AzureStorage",
                         "typeProperties": {
-                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('adfstorageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('adfstorageAccountName')),variables('storageApiVersion')).key1)]"
+                            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=informaticadeststore',';AccountKey=sTmN5sQmkpgGWkX7TAZzwoIconnxVTAojRa/u7o2aqdjlPhOdItmfhjaH3kL3Ii9BSD1JW/qpU2BA5+v+tmakA==')]"
                         }
                     }
                 },
@@ -218,6 +218,7 @@
                         "type": "AzureBlob",
                         "linkedServiceName": "[parameters('storageLinkedServiceName')]",
                         "typeProperties": {
+                            "fileName": "MachineDataProductAccount092302.csv",
                             "folderPath": "[parameters('inputFolderPath')]",
                             "format": {
                                 "type": "TextFormat",
@@ -300,7 +301,7 @@
                                     "scriptPath": "adfgetstarted/script/hiveinfop2p.hql",
                                     "scriptLinkedService": "hivestoredlinkedservice",
                                     "defines": {
-                                        "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/inputdata')]",
+                                        "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net')]",
                                         "partitionedtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/partitioneddata')]"
                                     }
                                 },
