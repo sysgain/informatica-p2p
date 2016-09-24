@@ -63,7 +63,7 @@ You can click the "deploy to Azure" button at the beginning of this document or 
 The deployment takes about 30-45 mins.
 ##Usage
 #### Connect
-After deploying the solution template we can verify the following 
+After deploying the solution template we can verify the following:
 We can verify the Informatica Signup process deployment by logging into the Informatica Cloud portal by using the credentials provided during the deployment for Informatica user name and password.
 Please find URL for the Informatica cloud:
 https://app.informaticaondemand.com/ma/
@@ -81,16 +81,15 @@ We can connect to the VM using RDP/Remote Desktop Connection. Once we are inside
 
 1.	From command prompt, navigate to the secure agent installation directory 
 
-cd  C:\Program Files (x86)\Informatica Cloud Secure Agent\main\agentcore
+     cd  C:\Program Files (x86)\Informatica Cloud Secure Agent\main\agentcore
   
-2.	You can check the registration status of a Secure Agent using the following   
+2.	You can check the registration status of a Secure Agent using the following command in the same directory:
 
-command in the same directory:
-consoleAgentManager.bat isConfigured
+     consoleAgentManager.bat isConfigured
 
 ##### From the Informatica Cloud portal
 
-After login into the Informatica Cloud Navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status we can see Up-to-date as shown below.
+After login into the Informatica Cloud navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status column we can see Up-to-date as shown below.
 
 ![[](images/ic1.png)](images/ic1.png)
 
