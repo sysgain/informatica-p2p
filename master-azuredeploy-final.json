@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string",
+            "type": "string
             "defaultValue": "eastus",
             "allowedValues": [
                 "eastus",
@@ -274,7 +274,7 @@
         "ip": "138.91.243.84:10011",
         "startIpAddress": "0.0.0.0",
         "endIpAddress": "255.255.255.255",
-        "inputFolderPath": "adfgetstarted",
+        "inputFolderPath": "adfgetstarted/",
         "outputFolderPath": "adfgetstarted/partitioneddata",
         "vnetAddressPrefix": "10.2.0.0/16",
         "subnet1Prefix": "10.2.0.0/24",
