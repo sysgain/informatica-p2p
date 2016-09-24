@@ -12,6 +12,7 @@
 Customers benefit greatly from solution templates because of the ease with which they can stand up enterprise-grade, fully integrated stacks on Azure. The extensive automation and testing of these solutions will allow them to spin up pre-production environments with minimal manual steps and customization.  Most importantly, customers now have the confidence to transition the solution into a fully production-ready environment with confidence.
 
 **Informatica HDInsight Solution Template** launches a bigdata solution stack that provides an automated provisioning, configuration and integration of Informatica Cloud and [Informatica CSA]https://azure.microsoft.com/en-us/marketplace/partners/informatica-cloud/informatica-cloud/) product on Azure. Combined with Azure Data Factory with ondemand HDInsight and SQL Datawarehouse products makes this solution ready for pre-production environments. These are intended as pilot solutions and not production ready.
+
 Please [contact us](azuremarketplace@sysgain.com) if you need further info or support on this solution.
 
 ##Licenses & Costs
