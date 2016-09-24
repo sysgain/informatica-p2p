@@ -70,12 +70,12 @@ https://app.informaticaondemand.com/ma/
 
 We should be able to login successfully
 
-We can verify the  Informatica cloud Security Agent  up-to-date status(upgraded to latest version)  by logging  two ways 
+We can verify the  Informatica cloud Security Agent up-to-date status(upgraded to latest version) two ways
+
 	By logging into the VM 
 	We can verify from the Informatica Cloud portal
-url: https://app.informaticaondemand.com/ma/  (use same Informatica credentials used during the deployment,   Informatica user name and password )
-##### By logging into the VM
 
+##### By logging into the VM
  
 We can connect to the VM using RDP/Remote Desktop Connection. Once we are inside the VM follow the below steps
 
@@ -88,6 +88,8 @@ We can connect to the VM using RDP/Remote Desktop Connection. Once we are inside
      consoleAgentManager.bat isConfigured
 
 ##### From the Informatica Cloud portal
+
+loggin into the portal(url: https://app.informaticaondemand.com/ma/) use same Informatica credentials used during the deployment.  (Informatica user name and password)
 
 After login into the Informatica Cloud navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status column we can see Up-to-date as shown below.
 
