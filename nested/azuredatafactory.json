@@ -219,7 +219,7 @@
                         "linkedServiceName": "[parameters('storageLinkedServiceName')]",
                         "typeProperties": {
                             "fileName": "MachineDataProductAccount092302",
-                            "folderPath": "[parameters('inputFolderPath')]",
+                            "folderPath": "adfgetstarted/",
                             "format": {
                                 "type": "TextFormat",
                                 "columnDelimiter": ","
@@ -233,6 +233,7 @@
                         "policy": {}
                     }
                 },
+
                 {
                     "dependsOn": [
                         "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
@@ -246,7 +247,7 @@
                         "type": "AzureBlob",
                         "linkedServiceName": "[parameters('storageLinkedServiceName')]",
                         "typeProperties": {
-                            "folderPath": "[parameters('outputFolderPath')]",
+                            "folderPath": "adfgetstarted/partitioneddata",
                             "format": {
                                 "type": "TextFormat",
                                 "columnDelimiter": ","
@@ -301,8 +302,8 @@
                                     "scriptPath": "adfgetstarted/script/hiveinfop2p.hql",
                                     "scriptLinkedService": "hivestoredlinkedservice",
                                     "defines": {
-                                        "inputtable": "[concat('wasb://adfgetstarted@', 'informaticadeststore', '.blob.core.windows.net')]",
-                                        "partitionedtable": "[concat('wasb://adfgetstarted@', 'informaticadeststore', '.blob.core.windows.net/partitioneddata')]"
+                                        "inputtable": "wasb://adfgetstarted@informaticadeststore.blob.core.windows.net/",
+                                        "partitionedtable": "wasb://adfgetstarted@informaticadeststore.blob.core.windows.net/partitioneddata"
                                     }
                                 },
                                 "inputs": [
