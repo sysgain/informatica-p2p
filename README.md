@@ -73,6 +73,7 @@ We should be able to login successfully
 We can verify the  Informatica cloud Security Agent up-to-date status(upgraded to latest version) two ways
 
 	By logging into the VM 
+
 	We can verify from the Informatica Cloud portal
 
 ##### By logging into the VM
