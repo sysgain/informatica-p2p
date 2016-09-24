@@ -304,7 +304,7 @@
         "timeToLive": "00:45:00",
         "frequency": "Hour",
         "armBaseUrl": "https://raw.githubusercontent.com/sysgain/informatica-p2p/demobranch",
-        "interval": 1,
+        "interval": 6,
         "writeBatchSize": 0,
         "writeBatchTimeout": "00:00:00",
         "timeout": "01:00:00",
