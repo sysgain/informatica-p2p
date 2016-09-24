@@ -274,7 +274,7 @@
         "ip": "138.91.243.84:10011",
         "startIpAddress": "0.0.0.0",
         "endIpAddress": "255.255.255.255",
-        "inputFolderPath": "adfgetstarted/inputdata",
+        "inputFolderPath": "adfgetstarted",
         "outputFolderPath": "adfgetstarted/partitioneddata",
         "vnetAddressPrefix": "10.2.0.0/16",
         "subnet1Prefix": "10.2.0.0/24",
@@ -724,81 +724,6 @@
                     },
                     "client_id": {
                         "value": "[variables('client_id')]"
-                    }
-                }
-            }
-        },
-        {
-            "name": "workflowAutomationSetup",
-            "apiVersion": "2015-01-01",
-            "type": "Microsoft.Resources/deployments",
-            "dependsOn": [
-                "informaticaCredentialsAutomationSetup",
-                "virtualMachineExtDeploy",
-                "sqlDataWarehoueSetup",
-                "adfstorageAccountDeploy",
-                "createContainerAutomationSetup"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('workflowAutomationSetupURL')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "jobIdWorkflow": {
-                        "value": "[parameters('jobIdWorkflow')]"
-                    },
-                    "automationAccountName": {
-                        "value": "[variables('wfaAtomationAccountName')]"
-                    },
-                    "credential1Name": {
-                        "value": "[variables('credential1Name')]"
-                    },
-                    "cred1Username": {
-                        "value": "[parameters('azure_Rm_Username')]"
-                    },
-                    "cred1Password": {
-                        "value": "[parameters('azure_Rm_Password')]"
-                    },
-                    "runbookName": {
-                        "value": "[variables('wfrunbookName')]"
-                    },
-                    "location": {
-                        "value": "[variables('automation_Location')]"
-                    },
-                    "runbookUrl": {
-                        "value": "[variables('wfrunbookUrl')]"
-                    },
-                    "sku": {
-                        "value": "[variables('sku')]"
-                    },
-                    "ip": {
-                        "value": "[variables('ip')]"
-                    },
-                    "sysgain_ms_email": {
-                        "value": "[variables('sysgain_ms_email')]"
-                    },
-                    "sysgain_ms_password": {
-                        "value": "[variables('sysgain_ms_password')]"
-                    },
-                    "informatica_user_name": {
-                        "value": "[parameters('informatica_user_name')]"
-                    },
-                    "informatica_user_password": {
-                        "value": "[parameters('informatica_user_password')]"
-                    },
-                    "informatica_csa_vmname": {
-                        "value": "[variables('vmName')]"
-                    },
-                    "client_id": {
-                        "value": "[variables('client_id')]"
-                    },
-                    "adfStorageAccName": {
-                        "value": "[variables('adfstorageAccName')]"
-                    },
-                    "adfStorageAccKey": {
-                        "value": "[reference('adfstorageAccountDeploy').outputs.primaryKey.value]"
                     }
                 }
             }
