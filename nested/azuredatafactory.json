@@ -301,8 +301,8 @@
                                     "scriptPath": "adfgetstarted/script/hiveinfop2p.hql",
                                     "scriptLinkedService": "hivestoredlinkedservice",
                                     "defines": {
-                                        "inputtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net')]",
-                                        "partitionedtable": "[concat('wasb://adfgetstarted@', parameters('adfstorageAccountName'), '.blob.core.windows.net/partitioneddata')]"
+                                        "inputtable": "[concat('wasb://adfgetstarted@', 'informaticadeststore', '.blob.core.windows.net')]",
+                                        "partitionedtable": "[concat('wasb://adfgetstarted@', 'informaticadeststore', '.blob.core.windows.net/partitioneddata')]"
                                     }
                                 },
                                 "inputs": [
