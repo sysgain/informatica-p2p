@@ -238,7 +238,7 @@
         "client_id": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
         "publicIPdns": "[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
         "hivescript": "",
-        "sysgain_ms_email": "[concat('sys',uniqueString(resourceGroup().id),'@gmail.com')]",
+        "sysgain_ms_email": "[concat('sysgain',uniqueString(resourceGroup().id),'@gmail.com')]",
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
