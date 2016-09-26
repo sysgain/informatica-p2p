@@ -135,13 +135,13 @@ param(
         storageAccountName = "$adfStorageAccName"
         storageAccountkey = "$adfStorageAccKey"
     }
-
+    
     $workflowBodyJson = $workflowBody | ConvertTo-Json
-    Start-Sleep -s 120
+    Start-Sleep -Seconds 120
     $workres = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json'
     
     Write-Output $workres | ConvertTo-Json
-    Start-Sleep -s 20
+    Start-Sleep -Seconds 20
 
     $workres1 = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json'
     Write-Output $workres1 | ConvertTo-Json
