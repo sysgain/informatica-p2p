@@ -63,9 +63,40 @@ You can click the "deploy to Azure" button at the beginning of this document or 
 The deployment takes about 30-45 mins.
 ##Usage
 #### Connect
-Login to Informatica Virtual machine with the provided output URL & Credentials. We can also login to the SQL Data Warehouse with the provided output URL to check the table.
+After deploying the solution template we can verify the following:
+We can verify the Informatica Signup process deployment by logging into the Informatica Cloud portal by using the credentials provided during the deployment for Informatica user name and password.
+Please find URL for the Informatica cloud:
+https://app.informaticaondemand.com/ma/
 
-By logging into the Power BI VM with the provided output URL & Credentials we can see the different kinds of reports.
+We should be able to login successfully
+
+We can verify the  Informatica cloud Security Agent up-to-date status(upgraded to latest version) two ways
+
+	By logging into the VM 
+
+   Verifying it from the Informatica Cloud portal
+
+##### By logging into the VM
+ 
+We can connect to the VM using RDP/Remote Desktop Connection. Once we are inside the VM follow the below steps
+
+1.	From command prompt, navigate to the secure agent installation directory 
+
+     cd  C:\Program Files (x86)\Informatica Cloud Secure Agent\main\agentcore
+  
+2.	You can check the registration status of a Secure Agent using the following command in the same directory:
+
+     consoleAgentManager.bat isConfigured
+
+##### From the Informatica Cloud portal
+
+loggin into the portal(url: https://app.informaticaondemand.com/ma/) use same Informatica credentials used during the deployment.  (Informatica user name and password)
+
+After login into the Informatica Cloud navigate to the Runtime Environments from Configure tab. We can see a table. In this table under Upgrade Status column we can see Up-to-date as shown below.
+
+![[](images/ic1.png)](images/ic1.png)
+
+![[](images/ic2.png)](images/ic2.png)
 
 ##Support
 For any support-related issues or questions, please contact azuremarketplace@sysgain.com for assistance.
