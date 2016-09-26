@@ -250,7 +250,7 @@
         "runbookName": "createtable",
         "dataFactName": "adf",
         "tableName": "bi9",
-        "vmName": "informatica",
+        "vmName": "[concat('inform-',uniqueString(resourceGroup().id))]",
         "storageAccountName": "infosa",
         "adfstorageAccountName": "adfsa",
         "storageAccName": "[concat(variables('storageAccountName'),uniqueString(resourceGroup().id))]",
