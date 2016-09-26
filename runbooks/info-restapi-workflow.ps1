@@ -119,7 +119,7 @@ param(
 
 
 
-   Start-Sleep -s 30
+   Start-Sleep -s 60
 
     #$workflowUrl = "https://138.91.243.84:10011/api/users/v1/components/informatica/workflow/ignitep2p"
     $workflowUrl = "https://$ip/api/users/v1/components/informatica/workflow/ignitep2p"
@@ -134,7 +134,7 @@ param(
         serverUrl = "$serverUrl"
         csa_name = "$informatica_csa_vmname"
         storageAccountName = "$adfStorageAccName"
-        storageAccountKey = "$adfStorageAccKey"
+        storageAccountkey = "$adfStorageAccKey"
     }
 
     $workflowBodyJson = $workflowBody | ConvertTo-Json
