@@ -119,11 +119,6 @@ param(
 
 
 
-<<<<<<< HEAD
-   
-=======
-   Start-Sleep -s 60
->>>>>>> 99ac7ec37e2b1f3b89715186665a1eed7c92c715
 
     #$workflowUrl = "https://138.91.243.84:10011/api/users/v1/components/informatica/workflow/ignitep2p"
     $workflowUrl = "https://$ip/api/users/v1/components/informatica/workflow/ignitep2p"
