@@ -140,13 +140,6 @@ param(
     Start-Sleep -Seconds 90
     $workres = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json' 
     Write-Output $workres | ConvertTo-Json
-    if(!$workres.statusCode -eq 403){
-
-        Start-Sleep -Seconds 20
-        $workres1 = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json'
-        Write-Output $workres1 | ConvertTo-Json
-        
-    }
 
     
 }
