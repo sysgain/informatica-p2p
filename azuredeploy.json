@@ -279,7 +279,7 @@
         "vnetAddressPrefix": "10.2.0.0/16",
         "subnet1Prefix": "10.2.0.0/24",
         "storageAccountType": "Standard_LRS",
-        "vmSize": "Standard_F4",
+        "vmSize": "Standard_F4s",
         "storageContainer": "vhds",
         "imagePublisher": "informatica-cloud",
         "imageOffer": "informatica-cloud",
