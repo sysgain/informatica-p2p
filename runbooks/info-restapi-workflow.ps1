@@ -137,7 +137,7 @@ param(
     }
     
     $workflowBodyJson = $workflowBody | ConvertTo-Json
-    Start-Sleep -Seconds 180
+    Start-Sleep -Seconds 120
     $workres = Invoke-RestMethod -Uri $workflowUrl -Method Post -Headers $workflowHead -Body $workflowBodyJson -ContentType 'application/json' 
     Write-Output $workres | ConvertTo-Json
 
