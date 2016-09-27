@@ -97,18 +97,6 @@
                 "description": " Public IP dns prefix"
             }
         },
-        "azure_Rm_Username": {
-            "type": "string",
-            "metadata": {
-                "description": "Azure RM Username"
-            }
-        },
-        "azure_Rm_Password": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Azure RM Password"
-            }
-        },
         "user_email": {
             "type": "string",
             "metadata": {
@@ -244,6 +232,8 @@
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
+        "azure_Rm_Username":"ash@sysgaininc.onmicrosoft.com",
+        "azure_Rm_Password":"Sysgain@#",
         "automationAccountName": "createtbl",
         "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
         "credentialName": "aocred",
@@ -654,10 +644,10 @@
                         "value": "[variables('credential1Name')]"
                     },
                     "cred1Username": {
-                        "value": "[parameters('azure_Rm_Username')]"
+                        "value": "[variables('azure_Rm_Username')]"
                     },
                     "cred1Password": {
-                        "value": "[parameters('azure_Rm_Password')]"
+                        "value": "[variables('azure_Rm_Password')]"
                     },
                     "runbookName": {
                         "value": "[variables('credSetupRunbookName')]"
@@ -756,10 +746,10 @@
                         "value": "[variables('credential1Name')]"
                     },
                     "cred1Username": {
-                        "value": "[parameters('azure_Rm_Username')]"
+                        "value": "[variables('azure_Rm_Username')]"
                     },
                     "cred1Password": {
-                        "value": "[parameters('azure_Rm_Password')]"
+                        "value": "[variables('azure_Rm_Password')]"
                     },
                     "runbookName": {
                         "value": "[variables('wfrunbookName')]"
@@ -942,10 +932,10 @@
                         "value": "[variables('credential1Name')]"
                     },
                     "cred1Username": {
-                        "value": "[parameters('azure_Rm_Username')]"
+                        "value": "[variables('azure_Rm_Username')]"
                     },
                     "cred1Password": {
-                        "value": "[parameters('azure_Rm_Password')]"
+                        "value": "[variables('azure_Rm_Password')]"
                     },
                     "runbookName": {
                         "value": "[variables('ccrunbookName')]"
