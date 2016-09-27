@@ -133,7 +133,7 @@
                             "name": "[parameters('runbookName')]"
                         },
                         "parameters": {
-                            "credentialName": "[parameters('credential1Name')]",
+                           
                             "adfStorageAccName": "[parameters('adfStorageAccName')]",
                             "adfStorageAccKey": "[parameters('adfStorageAccKey')]"
                         }
