@@ -230,7 +230,7 @@
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
         "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
-        "sqlDWServName": "sqlserv",
+        "sqlDWServName": "sqlser",
         "sqlDWDBName": "testdwdb",
         "azure_Rm_Username":"ash@sysgaininc.onmicrosoft.com",
         "azure_Rm_Password":"Sysgain@#",
