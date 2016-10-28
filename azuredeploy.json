@@ -78,13 +78,13 @@
                 "value1": "informatica"
             }
         },
-        "adminUsername_informatica_vm": {
+        "adminUsernameInformaticaVm": {
             "type": "string",
             "metadata": {
                 "description": "Username to login into informatica vm"
             }
         },
-        "adminPassword_informatica_vm": {
+        "adminPasswordInformaticaVm": {
             "type": "securestring",
             "metadata": {
                 "description": "Password to login into informatica vm"
@@ -97,74 +97,74 @@
                 "description": " Public IP dns prefix"
             }
         },
-        "user_email": {
+        "userEmail": {
             "type": "string",
             "metadata": {
                 "description": "Informatica Cloud email id"
             }
         },
-        "informatica_user_name": {
+        "informaticaUserName": {
             "type": "string",
             "metadata": {
                 "description": "Informatica Cloud username"
             }
         },
-        "informatica_user_password": {
+        "informaticaUserPassword": {
             "type": "securestring",
             "metadata": {
                 "description": "Informatica Cloud password"
             }
         },
-        "user_firstname": {
+        "userFirstname": {
             "type": "string",
             "defaultValue": "tester",
             "metadata": {
                 "description": "First name for Informatica Sign up"
             }
         },
-        "user_lastname": {
+        "userLastname": {
             "type": "string",
             "defaultValue": "master",
             "metadata": {
                 "description": "Last name for Informatica Sign up"
             }
         },
-        "user_title": {
+        "userTitle": {
             "type": "string",
             "defaultValue": "mytitle",
             "metadata": {
                 "description": "User title for Informatica Sign up"
             }
         },
-        "user_phone": {
+        "userPhone": {
             "type": "string",
             "defaultValue": "1234567890",
             "metadata": {
                 "description": "User phone number for Informatica Sign up. Only numbers Ex: 1234567890"
             }
         },
-        "org_name": {
+        "orgName": {
             "type": "string",
             "defaultValue": "sysgain",
             "metadata": {
                 "description": "Organization for Informatica Sign up"
             }
         },
-        "org_address": {
+        "orgAddress": {
             "type": "string",
             "defaultValue": "myadd",
             "metadata": {
                 "description": "Organization Address for Informatica Sign up"
             }
         },
-        "org_city": {
+        "orgCity": {
             "type": "string",
             "defaultValue": "mycity",
             "metadata": {
                 "description": "Organization city for Informatica Sign up"
             }
         },
-        "org_state": {
+        "orgState": {
             "type": "string",
             "defaultValue": "CA",
             "allowedValues": [
@@ -190,21 +190,21 @@
                 "description": "Organization state for Informatica Sign up, Hint:Pass State Postal Codes Ex:CA"
             }
         },
-        "org_zipcode": {
+        "orgZipcode": {
             "type": "string",
             "defaultValue": "98512",
             "metadata": {
                 "description": "Organization zipcode for Informatica Sign up"
             }
         },
-        "org_country": {
+        "orgCountry": {
             "type": "string",
             "defaultValue": "US",
             "metadata": {
                 "description": "Organization's country for Informatica Sign up, Hint:Pass Country's ISO Codes Ex:US"
             }
         },
-        "org_employees": {
+        "orgEmployees": {
             "type": "string",
             "defaultValue": "5001_",
             "allowedValues": [
@@ -223,13 +223,13 @@
         }
     },
     "variables": {
-        "client_id": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
+        "clientId": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
         "publicIPdns": "[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
         "hivescript": "",
         "sysgain_ms_email": "[concat('syshyd',uniqueString(resourceGroup().id),'279@gmail.com')]",
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
-        "arguments": "[concat(parameters('informatica_user_name'),' ',parameters('informatica_user_password'))]",
+        "arguments": "[concat(parameters('informaticaUserName'),' ',parameters('informaticaUserPassword'))]",
         "sqlDWServName": "sqlser",
         "sqlDWDBName": "testdwdb",
         "azure_Rm_Username":"ash@sysgaininc.onmicrosoft.com",
@@ -577,10 +577,10 @@
                         "value": "[variables('imageSKU')]"
                     },
                     "adminUsername": {
-                        "value": "[parameters('adminUsername_informatica_vm')]"
+                        "value": "[parameters('adminUsernameInformaticaVm')]"
                     },
                     "adminPassword": {
-                        "value": "[parameters('adminPassword_informatica_vm')]"
+                        "value": "[parameters('adminPasswordInformaticaVm')]"
                     },
                     "networkInterfaceName": {
                         "value": "[variables('networkInterfaceName')]"
@@ -671,49 +671,49 @@
                         "value": "[variables('sysgain_ms_password')]"
                     },
                     "user_email": {
-                        "value": "[parameters('user_email')]"
+                        "value": "[parameters('userEmail')]"
                     },
                     "informatica_user_name": {
-                        "value": "[parameters('informatica_user_name')]"
+                        "value": "[parameters('informaticaUserName')]"
                     },
                     "informatica_user_password": {
-                        "value": "[parameters('informatica_user_password')]"
+                        "value": "[parameters('informaticaUserPassword')]"
                     },
                     "user_firstname": {
-                        "value": "[parameters('user_firstname')]"
+                        "value": "[parameters('userFirstname')]"
                     },
                     "user_lastname": {
-                        "value": "[parameters('user_lastname')]"
+                        "value": "[parameters('userLastname')]"
                     },
                     "user_title": {
-                        "value": "[parameters('user_title')]"
+                        "value": "[parameters('userTitle')]"
                     },
                     "user_phone": {
-                        "value": "[parameters('user_phone')]"
+                        "value": "[parameters('userPhone')]"
                     },
                     "org_name": {
-                        "value": "[parameters('org_name')]"
+                        "value": "[parameters('orgName')]"
                     },
                     "org_address": {
-                        "value": "[parameters('org_address')]"
+                        "value": "[parameters('orgAddress')]"
                     },
                     "org_city": {
-                        "value": "[parameters('org_city')]"
+                        "value": "[parameters('orgCity')]"
                     },
                     "org_state": {
-                        "value": "[parameters('org_state')]"
+                        "value": "[parameters('orgState')]"
                     },
                     "org_zipcode": {
-                        "value": "[parameters('org_zipcode')]"
+                        "value": "[parameters('orgZipcode')]"
                     },
                     "org_country": {
-                        "value": "[parameters('org_country')]"
+                        "value": "[parameters('orgCountry')]"
                     },
                     "org_employees": {
-                        "value": "[parameters('org_employees')]"
+                        "value": "[parameters('orgEmployees')]"
                     },
                     "client_id": {
-                        "value": "[variables('client_id')]"
+                        "value": "[variables('clientId')]"
                     }
                 }
             }
@@ -773,16 +773,16 @@
                         "value": "[variables('sysgain_ms_password')]"
                     },
                     "informatica_user_name": {
-                        "value": "[parameters('informatica_user_name')]"
+                        "value": "[parameters('informaticaUserName')]"
                     },
                     "informatica_user_password": {
-                        "value": "[parameters('informatica_user_password')]"
+                        "value": "[parameters('informaticaUserPassword')]"
                     },
                     "informatica_csa_vmname": {
                         "value": "[variables('vmName')]"
                     },
                     "client_id": {
-                        "value": "[variables('client_id')]"
+                        "value": "[variables('clientId')]"
                     },
                     "adfStorageAccName": {
                         "value": "[variables('adfstorageAccName')]"
