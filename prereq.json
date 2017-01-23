@@ -1,12 +1,30 @@
 {
     "azuredeploy": {
-        "Password": {
+        "Password1": {
             "type":"Password",
             "properies":{
  
             },
             "mapping":{
-                "Password":"sqlDWAdminPassword"
+                "Password1":"sqlDWAdminPassword"
+            }
+        },
+         "Password2": {
+            "type":"Password",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "Password2":"adminPasswordInformaticaVm"
+            }
+        },
+         "Password3": {
+            "type":"Password",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "Password3":"adminPasswordInformaticaVm"
             }
         },
         "guid1": {
@@ -33,7 +51,7 @@
  
             },
             "mapping":{
-                "guid2":"jobIdWorkflow"
+                "guid3":"jobIdWorkflow"
             }
         },
             "guid4": {
@@ -42,7 +60,7 @@
  
             },
             "mapping":{
-                "guid2":"jobIdCont"
+                "guid4":"jobIdCont"
             }
         }
         
