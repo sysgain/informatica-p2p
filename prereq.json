@@ -26,6 +26,24 @@
             "mapping":{
                 "guid2":"jobIdSignup"
             }
+        },
+             "guid3": {
+            "type":"guid",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "guid2":"jobIdWorkflow"
+            }
+        },
+            "guid4": {
+            "type":"guid",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "guid2":"jobIdCont"
+            }
         }
         
     }
