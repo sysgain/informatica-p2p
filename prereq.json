@@ -1,0 +1,32 @@
+{
+    "azuredeploy": {
+        "Password": {
+            "type":"Password",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "Password":"sqlDWAdminPassword"
+            }
+        },
+        "guid1": {
+            "type":"guid",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "guid1":"jobId"
+            }
+        },
+        "guid2": {
+            "type":"guid",
+            "properies":{
+ 
+            },
+            "mapping":{
+                "guid2":"jobIdSignup"
+            }
+        }
+        
+    }
+}
