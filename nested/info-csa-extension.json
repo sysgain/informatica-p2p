@@ -37,7 +37,7 @@
           "fileUris": "[split(parameters('fileUris'), ' ')]"
         },
         "protectedSettings": {
-          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', 'scripts\', variables('firstFileName'), ' ', parameters('arguments'))]"
+          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', 'scripts\\', variables('firstFileName'), ' ', parameters('arguments'))]"
         }
       }
     }
