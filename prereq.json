@@ -24,7 +24,7 @@
  
             },
             "mapping":{
-                "Password3":"adminPasswordInformaticaVm"
+                "Password3":"informaticaUserPassword"
             }
         },
         "guid1": {
