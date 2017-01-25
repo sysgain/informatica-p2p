@@ -60,6 +60,24 @@
       "mapping":{  
         "guid4":"jobIdCont"
       }
+    },
+    "email1":{  
+      "type":"Email",
+      "properies":{  
+
+      },
+      "mapping":{  
+        "email1":"userEmail"
+      }
+    },
+    "email2":{  
+      "type":"Email",
+      "properies":{  
+
+      },
+      "mapping":{  
+        "email2":"informaticaUserName"
+      }
     }
   }
 }
