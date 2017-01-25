@@ -1,42 +1,43 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "vmName": {
-      "type": "string"
-    },
-    "location": {
-      "type": "string"
-    },
-    "fileUris": {
-      "type": "string"
-    },
-    "arguments": {
-      "type": "securestring"
-    }
-  },
-  "variables": {
-    "scriptFileName": "ICExtentionScript.ps1"
-  },
-  "resources": [
-    {
-      "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.8",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": "[parameters('fileUris')]"
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string"
         },
-        "protectedSettings": {
-          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
+        "location": {
+            "type": "string"
+        },
+        "fileUris": {
+            "type": "string"
+        },
+        "arguments": {
+            "type": "securestring"
         }
-      }
-    }
-  ]
+    },
+    "variables": {
+        "scriptFileName": "ICExtentionScript.ps1"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "[parameters('location')]",
+            "apiVersion": "2015-06-15",
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.8",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[parameters('fileUris')]"
+                    ]
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
+                }
+            }
+        }
+    ]
 }
-
