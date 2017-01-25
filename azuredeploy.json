@@ -64,14 +64,16 @@
         },
         "start": {
             "type": "string",
+            "defaultValue": "2017-01-27T18:00:00Z",
             "metadata": {
-                "description": "Start time of the data slice. ex: 2016-09-23T18:00:00Z"
+                "description": "Start time of the data slice. ex: 2017-01-27T18:00:00Z"
             }
         },
         "end": {
             "type": "string",
+            "defaultValue": "2017-01-27T19:00:00Z",
             "metadata": {
-                "description": "End time of the data slice. ex: 2016-09-23T19:00:00Z"
+                "description": "End time of the data slice. ex: 2017-01-27T19:00:00Z"
             }
         },
         "tag": {
@@ -231,7 +233,7 @@
         "clientId": "xSwkg5OMQCT4PxrIz5HrFOuq0rmiBUAV",
         "publicIPdns": "[concat(parameters('publicIPdnsPrefix'),uniqueString(resourceGroup().id))]",
         "hivescript": "",
-        "sysgain_ms_email": "[concat('syshyd',uniqueString(resourceGroup().id),'2749@gmail.com')]",
+        "sysgain_ms_email": "[concat('ashhyd',uniqueString(resourceGroup().id),'23x749@live.com')]",
         "sysgain_ms_password": "[uniqueString(resourceGroup().id)]",
         "automation_Location": "East US 2",
         "arguments": "[concat(parameters('informaticaUserName'),' ',parameters('informaticaUserPassword'))]",

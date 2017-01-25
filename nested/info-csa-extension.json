@@ -12,11 +12,11 @@
       "type": "string"
     },
     "arguments": {
-      "type": "securestring",
-      "defaultValue": " "
+      "type": "securestring"
     }
   },
   "variables": {
+    "scriptFileName": "ICExtentionScript.ps1"
   },
   "resources": [
     {
@@ -33,7 +33,7 @@
           "fileUris": "[parameters('fileUris')]"
         },
         "protectedSettings": {
-          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFolder'), '/', variables('scriptFileName'),' ',parameters('arguments'))]"
+          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
         }
       }
     }
