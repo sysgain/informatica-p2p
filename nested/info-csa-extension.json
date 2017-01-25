@@ -32,9 +32,9 @@
                 "settings": {
                     "fileUris": [
                         "[parameters('fileUris')]"
-                    ]
-                },
-                "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
+                    ],
+                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
+                }
             }
         }
     ]
