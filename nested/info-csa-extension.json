@@ -12,15 +12,11 @@
       "type": "string"
     },
     "arguments": {
-      "type": "securestring",
-      "defaultValue": " "
+      "type": "securestring"
     }
   },
   "variables": {
-    "UriFileNamePieces": "[split(parameters('fileUris'), '/')]",
-    "firstFileNameString": "[variables('UriFileNamePieces')[sub(length(variables('UriFileNamePieces')), 1)]]",
-    "firstFileNameBreakString": "[split(variables('firstFileNameString'), '?')]",
-    "firstFileName": "[variables('firstFileNameBreakString')[0]]"
+    "scriptFileName":"ICExtentionScript.ps1"
   },
   "resources": [
     {
@@ -31,13 +27,13 @@
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.7",
+        "typeHandlerVersion": "1.8",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": "[split(parameters('fileUris'), ' ')]"
+          "fileUris": "[parameters('fileUris')]"
         },
         "protectedSettings": {
-          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', 'scripts/', 'ICExtentionScript.ps1', ' ', parameters('arguments'))]"
+          "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',variables('scriptFileName'),' ',parameters('arguments'))]"
         }
       }
     }
