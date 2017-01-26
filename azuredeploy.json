@@ -239,7 +239,7 @@
         "arguments": "[concat(parameters('informaticaUserName'),' ',parameters('informaticaUserPassword'))]",
         "sqlDWServName": "sqlserv",
         "sqlDWDBName": "testdwdb",
-        "azure_Rm_Username":"ash@sysgaininc.onmicrosoft.com",
+        "azure_Rm_Username":"asebastian@sysgaininc.onmicrosoft.com",
         "azure_Rm_Password":"Sysgain@#",
         "automationAccountName": "createtbl",
         "accountName": "[concat(variables('automationAccountName'),uniqueString(resourceGroup().id))]",
